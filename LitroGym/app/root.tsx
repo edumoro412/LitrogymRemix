@@ -1,17 +1,20 @@
 import { LinksFunction } from "@remix-run/node";
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
 import Header from "./Componentes/Header/Header";
+import Footer from "./Componentes/Footer/Footer";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "Styles/tailwind.css" },
   { rel: "stylesheet", href: " /Styles/Header.css" },
   { rel: "stylesheet", href: "/Styles/home.css" },
+  { rel: "stylesheet", href: "Styles/Footer.css" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -27,6 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
@@ -37,6 +41,7 @@ export default function App() {
     <>
       <Header />
       <Outlet />
+      <Footer />
     </>
   );
 }

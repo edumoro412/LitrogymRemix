@@ -1,3 +1,5 @@
+import { Link } from "@remix-run/react";
+
 export default function Index() {
   return (
     <div>
@@ -25,9 +27,16 @@ export default function Index() {
         <p className="home-tipo">ALIMENTACION PERSONALIZADA:</p>
         <p className="home-tipo">CREA TU RUTINA:</p>
         <p className="home-tipo">EJERCICIOS ESPECÍFICOS:</p>
-        <button className="home-services" id="alimentacion"></button>
-        <button className="home-services" id="rutina"></button>
-        <button className="home-services" id="ejercicios"></button>
+        <Link to="Alimentacion">
+          <img src="/imgs/alimentacion.jpg" alt="Alimentacion" />
+        </Link>
+
+        <Link to="Rutina">
+          <img src="/imgs/rutina.jpg" alt="Rutina" />
+        </Link>
+        <Link to="Ejercicios">
+          <img src="/imgs/training.jpg" alt="Ejercicios" />
+        </Link>
       </div>
     </div>
   );

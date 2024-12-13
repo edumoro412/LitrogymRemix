@@ -22,9 +22,8 @@ export default function Header() {
           <Link to="QuienesSomos">
             <button className="header-boton">¿QUIENES SOMOS?</button>
           </Link>
-          <Link to="Contacto">
-            <button className="header-boton">CONTACTO</button>
-          </Link>
+
+          <button className="header-boton">CONTACTO</button>
         </div>
       </div>
     </>

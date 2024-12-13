@@ -1,0 +1,80 @@
+.footer {
+  padding-top: 1%;
+  padding-bottom: 1%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+  background: rgb(30, 30, 30);
+  width: 100%;
+  height: 30vh;
+  color: white;
+}
+.fa {
+  color: white;
+  font-size: 300%;
+  height: 100%;
+  width: 100%;
+}
+.footer-logos-btn {
+  background: rgb(30, 30, 30);
+  border: 0;
+}
+.footer-logos-btn:hover {
+  scale: 1.1;
+}
+.footer-logos {
+  margin-left: 3%;
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  justify-content: space-evenly;
+}
+.footer-content {
+  margin-left: 12%;
+  display: flex;
+  width: 80%;
+  height: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.footer-content-left {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.footer-content-right {
+  margin-left: 5%;
+  display: flex;
+  width: 50%;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.footer-content-title {
+  font-size: 150%;
+}
+.footer-boton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  display: inline;
+}
+
+.footer-boton p {
+  margin: 0;
+  display: inline;
+}
+.footer-boton p:hover {
+  color: rgb(35, 65, 173);
+}

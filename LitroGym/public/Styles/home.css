@@ -70,6 +70,7 @@
 #alimentacion,
 #rutina,
 #ejercicios {
+  margin: 20px;
   background-image: linear-gradient(
       to right bottom,
       rgba(190, 190, 190, 0.1),
@@ -157,4 +158,7 @@
   cursor: pointer;
   font: inherit;
   display: inline;
+}
+.home-endName {
+  margin: 20px;
 }
