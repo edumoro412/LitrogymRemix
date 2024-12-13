@@ -7,7 +7,7 @@ export default function Header() {
     <>
       <div className="header">
         <div className="header-leftheader">
-          <img src="../../../public/imgs/logo.png" alt="Logo" id="logo" />
+          <img src="/imgs/logo.png" alt="Logo" id="logo" />
           <p className="header-name">
             <b>LITROGYM</b>
           </p>
