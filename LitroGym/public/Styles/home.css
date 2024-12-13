@@ -1,0 +1,160 @@
+.home-content {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(175, 175, 175, 0.5),
+      rgb(0, 0, 0)
+    ),
+    url("/imgs/fotoFondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.home-info {
+  display: flex;
+  width: 70%;
+  height: 70%;
+  color: rgb(255, 255, 255);
+  flex-direction: column;
+  align-items: center;
+}
+.home-slogan {
+  font-size: 250%;
+}
+.home-textContent {
+  font-size: 150%;
+}
+.home-logo2 {
+  width: 25%;
+  height: auto;
+}
+/* SERVICIOS */
+.home-end {
+  display: flex;
+  background: #000;
+  width: 100%;
+  height: 50vh;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: space-around;
+  padding-bottom: 8%;
+}
+.home-endName {
+  display: flex;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  font-size: 190%;
+  align-items: center;
+  justify-content: space-around;
+}
+.home-tipo {
+  display: flex;
+  width: 27%;
+  color: rgb(255, 255, 255);
+  font-size: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+.home-services {
+  height: 29vh;
+  width: 24%;
+  border: 0;
+  background: #000;
+}
+#alimentacion,
+#rutina,
+#ejercicios {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(190, 190, 190, 0.1),
+      rgb(0, 0, 0)
+    ),
+    url("/imgs/alimentacion.jpg"); /* Cambia según el id correspondiente */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+#alimentacion {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(190, 190, 190, 0.1),
+      rgb(0, 0, 0)
+    ),
+    url("/imgs/alimentacion.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+#alimentacion:hover {
+  background-image: url("/imgs/alimentacion.jpg");
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+#rutina {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(190, 190, 190, 0.1),
+      rgb(0, 0, 0)
+    ),
+    url("/imgs/rutina.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+#rutina:hover {
+  background-image: url("/imgs/rutina.jpg");
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+#ejercicios {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(190, 190, 190, 0.1),
+      rgb(0, 0, 0)
+    ),
+    url("/imgs/training.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+#ejercicios:hover {
+  background-image: url("/imgs/training.jpg");
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.home-boton-servicios {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  display: inline;
+}

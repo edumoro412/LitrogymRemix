@@ -9,8 +9,9 @@ import {
 import Header from "./Componentes/Header/Header";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "Styles/tailwind.css" }, // Archivo CSS global
-  { rel: "stylesheet", href: " /Styles/Header.css" }, // Estilos para el Header
+  { rel: "stylesheet", href: "Styles/tailwind.css" },
+  { rel: "stylesheet", href: " /Styles/Header.css" },
+  { rel: "stylesheet", href: "/Styles/home.css" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
