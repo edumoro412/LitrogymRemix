@@ -24,19 +24,31 @@ export default function Index() {
         <p className="home-endName">
           <b>NUESTROS SERVICIOS</b>
         </p>
-        <p className="home-tipo">ALIMENTACION PERSONALIZADA:</p>
-        <p className="home-tipo">CREA TU RUTINA:</p>
-        <p className="home-tipo">EJERCICIOS ESPECÍFICOS:</p>
-        <Link to="Alimentacion">
-          <img src="/imgs/alimentacion.jpg" alt="Alimentacion" />
-        </Link>
+        <div className="home-end-titulos">
+          <p className="home-tipo">ALIMENTACION PERSONALIZADA:</p>
+          <p className="home-tipo">CREA TU RUTINA:</p>
+          <p className="home-tipo">EJERCICIOS ESPECÍFICOS:</p>
+        </div>
+        <div className="home-end-fotos">
+          <Link to="Alimentacion">
+            <img
+              src="/imgs/alimentacion.jpg"
+              alt="Alimentacion"
+              className="img-index"
+            />
+          </Link>
 
-        <Link to="Rutina">
-          <img src="/imgs/rutina.jpg" alt="Rutina" />
-        </Link>
-        <Link to="Ejercicios">
-          <img src="/imgs/training.jpg" alt="Ejercicios" />
-        </Link>
+          <Link to="Rutina">
+            <img src="/imgs/rutina.jpg" alt="Rutina" className="img-index" />
+          </Link>
+          <Link to="Ejercicios">
+            <img
+              src="/imgs/training.jpg"
+              alt="Ejercicios"
+              className="img-index"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );
