@@ -21,6 +21,12 @@
 }
 
 .img-index {
-  height: 200px;
-  width: 300px;
+  height: 250px;
+  width: 400px;
+  transition: transform 0.3s ease;
+  border-radius: 13px;
+}
+
+.img-index:hover {
+  transform: scale(1.2);
 }
