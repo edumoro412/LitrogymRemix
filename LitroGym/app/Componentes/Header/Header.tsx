@@ -1,8 +1,12 @@
 import { Link } from "@remix-run/react";
 
-// import "../Header/Header.css";
-
 export default function Header() {
+  function ScrollFooter() {
+    const footer = document.querySelector(".footer");
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" });
+    }
+  }
   return (
     <>
       <div className="header">
@@ -23,7 +27,9 @@ export default function Header() {
             <button className="header-boton">¿QUIENES SOMOS?</button>
           </Link>
 
-          <button className="header-boton">CONTACTO</button>
+          <button className="header-boton" onClick={ScrollFooter}>
+            CONTACTO
+          </button>
         </div>
       </div>
     </>
