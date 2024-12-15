@@ -1,4 +1,4 @@
-import { LinksFunction } from "@remix-run/node";
+import { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -10,7 +10,13 @@ import {
 import Header from "./Componentes/Header/Header";
 import Footer from "./Componentes/Footer/Footer";
 
+//Esto es para cambiar el titulo de la pestaña, se pone en root para que el titulo se mantenga en todas las pestañas.
+export const meta: MetaFunction = () => {
+  return [{ title: "LITROGYM" }];
+};
+
 export const links: LinksFunction = () => [
+  { rel: "icon", href: "/imgs/logoIcon.png" }, //Esta linea es para poner el logo en la pestaña
   { rel: "stylesheet", href: "Styles/tailwind.css" },
   { rel: "stylesheet", href: " /Styles/Header.css" },
   { rel: "stylesheet", href: "/Styles/home.css" },
