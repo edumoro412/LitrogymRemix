@@ -49,5 +49,5 @@
 .header-boton:hover {
   background: rgb(35, 35, 35);
   border-bottom: 2px solid rgb(170, 170, 170);
-  width: 100%;
+  width: auto;
 }
