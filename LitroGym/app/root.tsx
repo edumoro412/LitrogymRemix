@@ -24,6 +24,8 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "Styles/Footer.css" },
   { rel: "stylesheet", href: "Styles/LogIn.css" },
   { rel: "stylesheet", href: "Styles/Registro.css" },
+  { rel: "stylesheet", href: "Styles/Alimentacion.css" },
+  { rel: "stylesheet", href: "Styles/Rutina.css" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
