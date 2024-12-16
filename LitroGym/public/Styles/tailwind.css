@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+.home-end {
+  height: 100vh;
+  margin-bottom: 80px;
+}
 
 .home-end-titulos {
   width: 100%;
@@ -15,9 +19,10 @@
 }
 .home-end-fotos {
   width: 100%;
-  height: 100%;
+  height: 50vh;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 80px;
 }
 
 .img-index {
