@@ -1,0 +1,164 @@
+.QuienesSomos {
+  background: linear-gradient(to bottom, rgba(175, 175, 175, 0.5), rgb(0, 0, 0)),
+    url("/imgs/fotoFondo.jpg") center / cover no-repeat;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 9%;
+}
+
+h1 {
+  margin-top: 6%;
+  font-size: 250%;
+}
+
+.mision,
+.valores {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 50%;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
+  max-width: 600px;
+}
+
+.equipo {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  padding: 20px;
+}
+
+.equipo h2 {
+  margin: 2rem;
+  font-size: 200%;
+}
+
+.equipo button {
+  width: 30%;
+  height: 2rem;
+  margin-bottom: 2rem;
+  width: 50%;
+  border-radius: 2cap;
+  background-color: rgb(60, 135, 255);
+  border: none;
+  color: white;
+  font-size: 100%;
+}
+
+.equipo button:hover {
+  background-color: rgb(35, 65, 173);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.miembro {
+  margin: 10px;
+  text-align: center;
+  perspective: 1000px;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.miembro .flip-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.miembro:hover .flip-card {
+  transform: rotateY(180deg);
+}
+
+.miembro .front,
+.miembro .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  font-size: 60%;
+}
+
+.miembro .front {
+  background-color: #fff;
+}
+
+.miembro .back {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.imagen-miembro {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.valores {
+  width: 80%;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.valores h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  text-align: center;
+  color: white;
+}
+
+.valores ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.valores li {
+  margin-bottom: 10px;
+}
+
+.miembros {
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.miembros.desopaco {
+  opacity: 1;
+}
+
+.mision {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.mision h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.mision p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
