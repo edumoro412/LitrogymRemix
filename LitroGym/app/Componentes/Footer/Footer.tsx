@@ -44,12 +44,12 @@ export default function Footer() {
           </b>
         </div>
         <div className="footer-content-right">
-          <Link to="/">
+          <Link to="/" className="a-footer">
             <button className="footer-boton">
               <p>Home</p>
             </button>
           </Link>
-          <Link to="LogIn">
+          <Link to="LogIn" className="a-footer">
             <button className="footer-boton">
               <p>Iniciar Sesión</p>
             </button>
@@ -58,7 +58,7 @@ export default function Footer() {
           <button className="footer-boton">
             <p>Registro</p>
           </button>
-          <Link to="QuienesSomos">
+          <Link to="QuienesSomos" className="a-footer">
             <button className="footer-boton">
               <p>¿Quiénes somos?</p>
             </button>

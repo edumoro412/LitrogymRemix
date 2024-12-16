@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 export default function LogIn() {
   return (
     <>
@@ -30,10 +31,12 @@ export default function LogIn() {
               Enviar
             </button>
             <p className="login-textoRegistro">
-              ¿No tienes cuenta?{" "}
-              <button type="button" className="login-boton-registro">
-                Regístrate aquí
-              </button>
+              ¿No tienes cuenta?
+              <Link to="/Registro">
+                <button type="button" className="login-boton-registro">
+                  Regístrate aquí
+                </button>
+              </Link>
             </p>
           </form>
         </div>

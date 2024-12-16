@@ -17,11 +17,13 @@ export const meta: MetaFunction = () => {
 
 export const links: LinksFunction = () => [
   { rel: "icon", href: "/imgs/logoIcon.png" }, //Esta linea es para poner el logo en la pestaña
+  { rel: "shortcut icon", href: "/imgs/logoIcon.png" },
   { rel: "stylesheet", href: "Styles/tailwind.css" },
   { rel: "stylesheet", href: " /Styles/Header.css" },
   { rel: "stylesheet", href: "/Styles/home.css" },
   { rel: "stylesheet", href: "Styles/Footer.css" },
   { rel: "stylesheet", href: "Styles/LogIn.css" },
+  { rel: "stylesheet", href: "Styles/Registro.css" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
