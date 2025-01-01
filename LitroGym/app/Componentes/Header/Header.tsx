@@ -10,37 +10,37 @@ export default function Header() {
 
   return (
     <>
-      <div className="header bg-black flex w-full h-[15vh] text-white text-[130%] flex-row justify-start">
-        <div className="header-leftheader flex w-1/2 items-center justify-start">
+      <div className=" bg-black flex w-full h-[15vh] text-white text-[130%] flex-row justify-start">
+        <div className=" flex w-1/2 items-center justify-start">
           <img
             src="/imgs/logo.png"
             alt="Logo"
             id="logo"
             className="h-full w-auto"
           />
-          <p className="header-name text-[190%] ml-[5%]">
+          <p className="text-[190%] ml-[5%]">
             <b>LITROGYM</b>
           </p>
         </div>
-        <div className="header-rightheader flex w-1/2 justify-around">
+        <div className=" flex w-1/2 justify-around">
           <Link to="/">
-            <button className="header-boton text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
+            <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
               HOME
             </button>
           </Link>
           <Link to="LogIn">
-            <button className="header-boton text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
+            <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
               INICIAR SESIÓN
             </button>
           </Link>
           <Link to="QuienesSomos">
-            <button className="header-boton text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
+            <button className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
               ¿QUIENES SOMOS?
             </button>
           </Link>
 
           <button
-            className="header-boton text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]"
+            className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]"
             onClick={ScrollFooter}
           >
             CONTACTO
