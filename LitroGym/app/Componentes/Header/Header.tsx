@@ -7,6 +7,7 @@ export default function Header() {
       footer.scrollIntoView({ behavior: "smooth" });
     }
   }
+
   return (
     <>
       <div className="header">
