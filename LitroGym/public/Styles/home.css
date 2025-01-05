@@ -1,3 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-end-titulos {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.home-end-titulos p {
+  margin: 30px;
+}
+.home-end-fotos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.img-index {
+  height: 250px;
+  width: 400px;
+  transition: transform 0.3s ease;
+  border-radius: 13px;
+}
+
+.img-index:hover {
+  transform: scale(1.2);
+}
+
 .home-content {
   background-image: linear-gradient(
       to bottom,
@@ -67,38 +100,6 @@
   border: 0;
   background: #000;
 }
-#alimentacion,
-#rutina,
-#ejercicios {
-  margin: 20px;
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(190, 190, 190, 0.1),
-      rgb(0, 0, 0)
-    ),
-    url("/imgs/alimentacion.jpg"); /* Cambia según el id correspondiente */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
-}
-
-#alimentacion {
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(190, 190, 190, 0.1),
-      rgb(0, 0, 0)
-    ),
-    url("/imgs/alimentacion.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
-}
 
 #alimentacion:hover {
   background-image: url("/imgs/alimentacion.jpg");
@@ -106,40 +107,10 @@
   opacity: 0.8;
 }
 
-#rutina {
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(190, 190, 190, 0.1),
-      rgb(0, 0, 0)
-    ),
-    url("/imgs/rutina.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
-}
-
 #rutina:hover {
   background-image: url("/imgs/rutina.jpg");
   transform: scale(1.1);
   opacity: 0.8;
-}
-
-#ejercicios {
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(190, 190, 190, 0.1),
-      rgb(0, 0, 0)
-    ),
-    url("/imgs/training.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
 }
 
 #ejercicios:hover {
