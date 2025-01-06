@@ -76,7 +76,8 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-content: space-around;
-  padding-bottom: 8%;
+  padding-bottom: 4rem;
+  margin-bottom: 10rem;
 }
 .home-endName {
   display: flex;

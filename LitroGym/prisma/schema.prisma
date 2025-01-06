@@ -13,9 +13,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario { 
-  nombre String
-  email String  @unique
-  contrasena String
+
+model User {
+  id                  String       @id @default(cuid()) 
+  name                String
+  email               String       @unique
+  password            String
+  ejerciciosFavoritos UserEjercicio[]  @relation("UserFavoritosEjercicios")
+  rutinas             Rutina[]     @relation("UserRutinas")
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
 }
 
+model Ejercicio {
+  id                 String       @id @default(cuid()) 
+  nombre             String
+  usuariosFavoritos  UserEjercicio[]       @relation("UserFavoritosEjercicios")
+  rutinas            Rutina[]     @relation("EjercicioRutinas")
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+model Rutina {
+  id                 String       @id @default(cuid()) 
+  ejercicios         Ejercicio[]  @relation("EjercicioRutinas")
+  user               User         @relation("UserRutinas", fields: [userId], references: [id], onDelete: Cascade)
+  userId             String
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+model UserEjercicio {
+  userId     String
+  ejercicioId String
+  user       User       @relation("UserFavoritosEjercicios", fields: [userId], references: [id], onDelete: Cascade)
+  ejercicio  Ejercicio  @relation("UserFavoritosEjercicios", fields: [ejercicioId], references: [id], onDelete: Cascade)
+
+  @@id([userId, ejercicioId])
+}
