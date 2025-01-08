@@ -1,5 +1,4 @@
 import { Link } from "@remix-run/react";
-import "/Styles/tailwind.css";
 
 export default function Header() {
   function ScrollFooter() {

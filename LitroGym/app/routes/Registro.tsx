@@ -1,6 +1,7 @@
 import { redirect, useFetcher } from "@remix-run/react";
 import { useState } from "react";
 import { ActionFunction, json } from "@remix-run/node";
+// eslint-disable-next-line import/no-unresolved
 import { createUser } from "~/services/user.services";
 
 export const action: ActionFunction = async ({ request }) => {
