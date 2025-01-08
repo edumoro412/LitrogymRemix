@@ -33,6 +33,9 @@
   justify-content: space-around;
 }
 
+.registro-formulario input {
+  color: black;
+}
 .registro-titulo {
   text-align: center;
 
