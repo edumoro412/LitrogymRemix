@@ -1,4 +1,4 @@
-import { createUser } from "../../services/user_services"; // Para crear un usuario
+import { createUser } from "../../services/user.services"; // Para crear un usuario
 
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();

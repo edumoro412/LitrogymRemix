@@ -1,96 +1,95 @@
+import { redirect, useFetcher } from "@remix-run/react";
 import { useState } from "react";
+import { ActionFunction, json } from "@remix-run/node";
+import { createUser } from "~/services/user.services";
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  try {
+    const user = await createUser(name, email, password);
+    if (!user) {
+      throw new Error("No se pudo crear el usuario."); // Lanza un error si `user` es null o undefined.
+    }
+    return redirect("/login"); // Verifica que esta línea no tenga problemas.
+  } catch (error) {
+    console.error("Error general:", error); // Esto ayudará a identificar errores generales.
+    return json({ success: false, error: "Error al crear el usuario" });
+  }
+};
 
 export default function Registro() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const fetcher = useFetcher<{
+    success: boolean;
+    user?: { name: string };
+    error?: string;
+  }>();
 
-  const handleRegistro = async (e: React.FormEvent) => {
+  const handleRegistro = (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    try {
-      const response = await fetch("/api/registro", {
-        method: "POST",
-        body: new URLSearchParams({ name, email, password }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setSuccess(data.success);
-      } else {
-        setError(data.error);
-      }
-    } catch (err) {
-      console.error(err);
-      setError("Error inesperado");
-    }
+    fetcher.submit(
+      { name, email, password },
+      { method: "post", action: "/registro" }
+    );
   };
 
   return (
     <div className="registro">
       <b className="registro-titulo">CREA TU CUENTA</b>
       <div className="registro-contenedor">
-        <form
-          className="registro-formulario"
-          onSubmit={handleRegistro}
-          method="POST"
-        >
+        <form className="registro-formulario" onSubmit={handleRegistro}>
           <div className="registro-grupoinput">
-            <label htmlFor="name">
-              <p>Nombre: </p>
-            </label>
-            <br />
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="registro-grupoinput">
-            <label htmlFor="email">
+            <label htmlFor="correo">
               <p>Correo electrónico: </p>
             </label>
-            <br />
             <input
               type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="correo"
               required
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div className="registro-grupoinput">
-            <label htmlFor="password">
+            <label htmlFor="nombre">
+              <p>Nombre: </p>
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              required
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div className="registro-grupoinput">
+            <label htmlFor="contrasena">
               <p>Contraseña: </p>
             </label>
-            <br />
             <input
               type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              id="contrasena"
               required
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <button type="submit" className="registro-boton">
-            Crear Cuenta
+            Enviar
           </button>
         </form>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        {fetcher.data && fetcher.data.success && fetcher.data.user && (
+          <p>Usuario creado correctamente: {fetcher.data.user.name}</p>
+        )}
+        {fetcher.data && !fetcher.data.success && (
+          <p>Error: {fetcher.data.error}</p>
+        )}
       </div>
     </div>
   );

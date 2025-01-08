@@ -1,7 +1,6 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -10,7 +9,7 @@ import {
 import Header from "./Componentes/Header/Header";
 import Footer from "./Componentes/Footer/Footer";
 // eslint-disable-next-line import/no-unresolved
-import "~/tailwind.css";
+import "/styles/tailwind.css";
 
 //Esto es para cambiar el titulo de la pestaña, se pone en root para que el titulo se mantenga en todas las pestañas.
 export const meta: MetaFunction = () => {
@@ -20,7 +19,6 @@ export const meta: MetaFunction = () => {
 export const links: LinksFunction = () => [
   { rel: "icon", href: "/imgs/logoIcon.png" }, // Esta línea es para poner el logo en la pestaña
   { rel: "shortcut icon", href: "/imgs/logoIcon.png" },
-  { rel: "stylesheet", href: "~/tailwind.css" },
   { rel: "stylesheet", href: "/Styles/home.css" },
   { rel: "stylesheet", href: "Styles/Footer.css" },
   { rel: "stylesheet", href: "Styles/LogIn.css" },
@@ -43,7 +41,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
