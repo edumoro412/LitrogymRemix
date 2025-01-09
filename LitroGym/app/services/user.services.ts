@@ -37,3 +37,18 @@ export function getUserById(id: string) {
     },
   });
 }
+
+export async function AuthenticateUser(
+  email: string,
+  password: string
+): Promise<boolean> {
+  const user = await getUser(email);
+
+  if (!user) {
+    return false;
+  }
+
+  const isPasswordValid = await argon2.verify(user.password, password); //Aqui comparamos la contraseña que ha insertado con la del usuario en la base de datos
+
+  return isPasswordValid;
+}

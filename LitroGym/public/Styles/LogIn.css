@@ -1,6 +1,9 @@
 body {
   background: #000;
 }
+input {
+  color: black;
+}
 .login {
   background-image: linear-gradient(
       to bottom,
