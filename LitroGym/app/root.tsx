@@ -21,7 +21,6 @@ export const links: LinksFunction = () => [
   { rel: "shortcut icon", href: "/imgs/logoIcon.png" },
   { rel: "stylesheet", href: "/Styles/home.css" },
   { rel: "stylesheet", href: "Styles/Footer.css" },
-  { rel: "stylesheet", href: "Styles/LogIn.css" },
   { rel: "stylesheet", href: "Styles/Registro.css" },
   { rel: "stylesheet", href: "Styles/Alimentacion.css" },
   { rel: "stylesheet", href: "Styles/Rutina.css" },
