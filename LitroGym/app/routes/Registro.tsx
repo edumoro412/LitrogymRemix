@@ -21,7 +21,10 @@ export const action: ActionFunction = async ({ request }) => {
     return redirect("/login");
   } catch (error) {
     console.error("Error general:", error); // Esto ayudará a identificar errores generales.
-    return json({ success: false, error: "Error al crear el usuario" });
+    return json({
+      success: false,
+      error: "El correo ya tiene una cuenta asociada",
+    });
   }
 };
 

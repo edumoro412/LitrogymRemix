@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+
 export default function Footer() {
   return (
     <div className="footer">
@@ -30,49 +31,35 @@ export default function Footer() {
       </div>
       <div className="footer-content">
         <div className="footer-content-left">
-          <b>
-            <p className="footer-content-title">LITROGYM</p>
-          </b>
+          <strong className="footer-content-title">LITROGYM</strong>
           <p>Entrenamiento personal, nutrición y mucho más</p>
           <p>C. Romero, 2, 28221 Majadahonda, Madrid</p>
-          <b>
-            <p className="footer-content-title">Datos de contacto</p>
-          </b>
+          <strong className="footer-content-title">Datos de contacto</strong>
           <p>litrocontacto@gmail.com</p>
-          <b>
-            <p>+34 91 234 56 78</p>
-          </b>
+          <strong>+34 91 234 56 78</strong>
         </div>
         <div className="footer-content-right">
-          <Link to="/" className="a-footer">
-            <button className="footer-boton">
-              <p>Home</p>
-            </button>
+          <Link to="/" className="footer-boton">
+            <span>Home</span>
           </Link>
-          <Link to="LogIn" className="a-footer">
-            <button className="footer-boton">
-              <p>Iniciar Sesión</p>
-            </button>
+          <Link to="LogIn" className="footer-boton">
+            <span>Iniciar Sesión</span>
           </Link>
-
-          <button className="footer-boton">
-            <p>Registro</p>
-          </button>
-          <Link to="QuienesSomos" className="a-footer">
-            <button className="footer-boton">
-              <p>¿Quiénes somos?</p>
-            </button>
+          <Link to="Registro" className="footer-boton">
+            <span>Registro</span>
           </Link>
-
-          <button className="footer-boton">
-            <p>Alimentación</p>
-          </button>
-          <button className="footer-boton">
-            <p>Rutina</p>
-          </button>
-          <button className="footer-boton">
-            <p>Buscar Ejercicios</p>
-          </button>
+          <Link to="QuienesSomos" className="footer-boton">
+            <span>¿Quiénes somos?</span>
+          </Link>
+          <Link to="Alimentacion" className="footer-boton">
+            <span>Alimentación</span>
+          </Link>
+          <Link to="Rutina" className="footer-boton">
+            <span>Rutina</span>
+          </Link>
+          <Link to="BuscarEjercicios" className="footer-boton">
+            <span>Buscar Ejercicios</span>
+          </Link>
         </div>
       </div>
     </div>
