@@ -1,6 +1,7 @@
 import { ActionFunction } from "@remix-run/node";
-import { json, Link, redirect, useFetcher } from "@remix-run/react";
-import { useState } from "react";
+import { Link, redirect, useFetcher } from "@remix-run/react";
+// eslint-disable-next-line import/no-unresolved
+import { commitSession, getSession } from "~/services/session";
 // eslint-disable-next-line import/no-unresolved
 import { AuthenticateUser } from "~/services/user.services";
 
@@ -10,26 +11,30 @@ export const action: ActionFunction = async ({ request }) => {
   const password = formData.get("contrasena") as string;
 
   try {
-    const valido = await AuthenticateUser(email, password);
+    const userId = await AuthenticateUser(email, password);
 
-    if (valido) {
-      return redirect("/");
-    } else {
-      return json({ succes: false, error: "La contraseña es incorrecta" });
+    if (!userId) {
+      return { succes: false, error: "La contraseña es incorrecta" };
     }
+
+    const session = await getSession(request.headers.get("Cookie"));
+    session.set("userEmail", email);
+
+    return redirect("/", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
   } catch (error) {
-    return json({ succes: false, error: "Hubo un error" });
+    return {
+      succes: false,
+      error: "Hubo un error durante la autenticación",
+    };
   }
 };
-export default function LogIn() {
-  const [email, setEmail] = useState("");
-  const [contrasena, setContrasena] = useState("");
-  const fetcher = useFetcher<{ succes: boolean; error?: string }>();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetcher.submit({ email, contrasena }, { method: "post", action: "/login" });
-  };
+export default function LogIn() {
+  const fetcher = useFetcher<{ succes: boolean; error?: string }>();
 
   return (
     <div
@@ -41,18 +46,17 @@ export default function LogIn() {
       <div className="bg-black bg-opacity-65 w-[35vw] h-[60%] flex flex-col justify-around items-center p-4 rounded-2xl shadow-xl relative">
         <b className="text-center text-3xl my-2">INICIAR SESIÓN</b>
 
-        <form className="flex flex-col w-full" onSubmit={handleLogin}>
+        <form className="flex flex-col w-full" method="post">
           <div className="mb-4">
-            <label htmlFor="usuario" className="text-xl">
+            <label htmlFor="email" className="text-xl">
               Correo electrónico:
             </label>
             <input
               type="email"
-              name="usuario"
-              id="usuario"
+              name="email"
+              id="email"
               required
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg items-center"
+              className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg"
             />
           </div>
 
@@ -65,7 +69,6 @@ export default function LogIn() {
               name="contrasena"
               id="contrasena"
               required
-              onChange={(e) => setContrasena(e.target.value)}
               className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg"
             />
           </div>
