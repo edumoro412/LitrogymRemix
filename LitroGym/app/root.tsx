@@ -1,4 +1,9 @@
-import { LinksFunction, MetaFunction } from "@remix-run/node";
+import {
+  json,
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -8,12 +13,27 @@ import {
 } from "@remix-run/react";
 import Header from "./Componentes/Header/Header";
 import Footer from "./Componentes/Footer/Footer";
+import { getSession } from "./services/session";
 // eslint-disable-next-line import/no-unresolved
 import "/styles/tailwind.css";
 
 //Esto es para cambiar el titulo de la pestaña, se pone en root para que el titulo se mantenga en todas las pestañas.
 export const meta: MetaFunction = () => {
   return [{ title: "LITROGYM" }];
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  // Obtén la sesión desde las cookies
+  const cookieHeader = request.headers.get("Cookie");
+  const session = await getSession(cookieHeader);
+
+  // Obtén el userId de la sesión
+  const userId = session.get("userId");
+
+  // Mostrar el userId en el servidor
+  console.log("Valor de userId en la sesión:", userId);
+
+  return json({ userId });
 };
 
 export const links: LinksFunction = () => [

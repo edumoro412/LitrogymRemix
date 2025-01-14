@@ -41,14 +41,12 @@ export function getUserById(id: string) {
 export async function AuthenticateUser(
   email: string,
   password: string
-): Promise<boolean> {
+): Promise<{ id: string; name: string } | null> {
   const user = await getUser(email);
 
-  if (!user) {
-    return false;
+  if (!user || !(await argon2.verify(user.password, password))) {
+    return null;
   }
 
-  const isPasswordValid = await argon2.verify(user.password, password); //Aqui comparamos la contraseña que ha insertado con la del usuario en la base de datos
-
-  return isPasswordValid;
+  return { id: user.id, name: user.name };
 }

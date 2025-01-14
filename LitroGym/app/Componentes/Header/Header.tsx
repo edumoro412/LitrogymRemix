@@ -1,9 +1,7 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 // eslint-disable-next-line import/no-unresolved
 
 export default function Header() {
-  const email = useLoaderData() as string | null;
-  console.log(email);
   function ScrollFooter() {
     const footer = document.querySelector(".footer");
     if (footer) {
@@ -33,7 +31,7 @@ export default function Header() {
           </Link>
           <Link to="LogIn">
             <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
-              {email ? "LOGOUT" : "LOG IN"}
+              INICIA SESION
             </button>
           </Link>
           <Link to="QuienesSomos">
@@ -50,8 +48,6 @@ export default function Header() {
           </button>
         </div>
       </div>
-      {email && <p>Bienvenido, {email}</p>}{" "}
-      {/* Muestra el correo si está en la sesión */}
     </>
   );
 }

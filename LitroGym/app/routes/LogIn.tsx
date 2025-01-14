@@ -1,4 +1,4 @@
-import { ActionFunction } from "@remix-run/node";
+import { ActionFunction, json } from "@remix-run/node";
 import { Link, redirect, useFetcher } from "@remix-run/react";
 // eslint-disable-next-line import/no-unresolved
 import { commitSession, getSession } from "~/services/session";
@@ -13,19 +13,18 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const userId = await AuthenticateUser(email, password);
 
-    //Si el usuario tiene la contraseña incorrecta o el email no se encuentra en la base de datos lanzará este error
-    if (!userId) {
-      return {
-        succes: false,
-        error: "La contraseña o el email son incorrectos",
-      };
+    // Si el usuario tiene la contraseña incorrecta o el email no se encuentra en la base de datos lanzará este error
+    if (userId == null) {
+      return json(
+        { success: false, error: "La contraseña o el email son incorrectos" },
+        { status: 400 }
+      );
     }
 
-    //Si el usuario es correcto
+    // Si el usuario es correcto
     const cookieHeader = request.headers.get("cookie");
     const session = await getSession(cookieHeader);
-    session.set("userId", undefined);
-    session.set("userId", email);
+    session.set("userId", userId.id);
 
     return redirect("/", {
       headers: {
@@ -33,15 +32,15 @@ export const action: ActionFunction = async ({ request }) => {
       },
     });
   } catch (error) {
-    return {
-      succes: false,
-      error: "Hubo un error durante la autenticación",
-    };
+    return json(
+      { success: false, error: "Hubo un error durante la autenticación" },
+      { status: 500 }
+    );
   }
 };
 
 export default function LogIn() {
-  const fetcher = useFetcher<{ succes: boolean; error?: string }>();
+  const fetcher = useFetcher<{ success: boolean; error?: string }>();
 
   return (
     <div
@@ -53,7 +52,7 @@ export default function LogIn() {
       <div className="bg-black bg-opacity-65 w-[35vw] h-[60%] flex flex-col justify-around items-center p-4 rounded-2xl shadow-xl relative">
         <b className="text-center text-3xl my-2">INICIAR SESIÓN</b>
 
-        <form className="flex flex-col w-full" method="post">
+        <fetcher.Form method="post" className="flex flex-col w-full">
           <div className="mb-4">
             <label htmlFor="email" className="text-xl">
               Correo electrónico:
@@ -99,12 +98,18 @@ export default function LogIn() {
             </Link>
           </p>
 
-          {fetcher.data && !fetcher.data.succes && (
+          {fetcher.state === "submitting" && (
+            <p className="text-blue-500 text-center mt-4">
+              Iniciando sesión...
+            </p>
+          )}
+
+          {fetcher.data && !fetcher.data.success && (
             <p className="text-red-500 text-center mt-4">
               Error: {fetcher.data.error}
             </p>
           )}
-        </form>
+        </fetcher.Form>
       </div>
     </div>
   );
