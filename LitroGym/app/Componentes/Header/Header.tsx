@@ -1,19 +1,5 @@
-import { LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 // eslint-disable-next-line import/no-unresolved
-import {
-  cookie,
-  getSession,
-  getUserEmailFromSession,
-} from "~/services/session";
-
-export const loader: LoaderFunction = async ({ request }) => {
-  const cookie = request.headers.get("cookie");
-  const session = await getSession(cookie);
-  const email = session.get("email");
-  console.log(cookie);
-  return { email };
-};
 
 export default function Header() {
   const email = useLoaderData() as string | null;

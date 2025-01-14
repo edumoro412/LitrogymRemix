@@ -13,12 +13,19 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const userId = await AuthenticateUser(email, password);
 
+    //Si el usuario tiene la contraseña incorrecta o el email no se encuentra en la base de datos lanzará este error
     if (!userId) {
-      return { succes: false, error: "La contraseña es incorrecta" };
+      return {
+        succes: false,
+        error: "La contraseña o el email son incorrectos",
+      };
     }
 
-    const session = await getSession(request.headers.get("Cookie"));
-    session.set("userEmail", email);
+    //Si el usuario es correcto
+    const cookieHeader = request.headers.get("cookie");
+    const session = await getSession(cookieHeader);
+    session.set("userId", undefined);
+    session.set("userId", email);
 
     return redirect("/", {
       headers: {
