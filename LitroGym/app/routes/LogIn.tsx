@@ -25,6 +25,7 @@ export const action: ActionFunction = async ({ request }) => {
     const cookieHeader = request.headers.get("cookie");
     const session = await getSession(cookieHeader);
     session.set("userId", userId.id);
+    session.set("userName", userId.name);
 
     return redirect("/", {
       headers: {
