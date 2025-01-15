@@ -29,11 +29,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   // Obtén el userId de la sesión
   const userId = session.get("userId");
+  const userName = session.get("userName");
 
   // Mostrar el userId en el servidor
   console.log("Valor de userId en la sesión:", userId);
+  console.log("Valor de userName en la sesión:", userName);
 
-  return json({ userId });
+  return json({ userId, userName });
 };
 
 export const links: LinksFunction = () => [

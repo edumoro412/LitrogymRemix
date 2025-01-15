@@ -1,107 +1,99 @@
-import { redirect, useFetcher } from "@remix-run/react";
-import { useState } from "react";
-import { ActionFunction, json } from "@remix-run/node";
+import { useFetcher } from "@remix-run/react";
+
+import { ActionFunction, json, redirect } from "@remix-run/node";
 // eslint-disable-next-line import/no-unresolved
-import { createUser } from "~/services/user.services";
+import { createUser } from "~/services/user.services"; // Asegúrate de que la función `createUser` esté exportada correctamente
 
 export const action: ActionFunction = async ({ request }) => {
-  //Basicamente obtiene los datos del formulario
-  const formData = await request.formData();
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+  // Recibimos los datos del formulario
+  const formData = new URLSearchParams(await request.text());
+  const name = formData.get("name")!;
+  const email = formData.get("email")!;
+  const password = formData.get("password")!;
 
   try {
-    //Aqui se crea al usuario
-
+    // Intentamos crear el usuario
     const user = await createUser(name, email, password);
+
     if (!user) {
-      throw new Error("No se pudo crear el usuario."); // Lanza un error si `user` es null o undefined.
+      return json(
+        {
+          success: false,
+          error: "Hubo un problema al crear el usuario.",
+        },
+        { status: 500 }
+      );
     }
+
+    // Si el usuario se crea correctamente, lo redirigimos al login
     return redirect("/login");
   } catch (error) {
-    console.error("Error general:", error); // Esto ayudará a identificar errores generales.
-    return json({
-      success: false,
-      error: "El correo ya tiene una cuenta asociada",
-    });
+    console.error(error);
+
+    // En caso de error, mostramos el mensaje adecuado
+    return json(
+      {
+        success: false,
+        error: "Ya existe una cuenta asociada a este correo electrónico.",
+      },
+      { status: 400 }
+    );
   }
 };
 
 export default function Registro() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const fetcher = useFetcher<{
     success: boolean;
     user?: { name: string };
     error?: string;
   }>();
 
-  //El fetcher envia los datos del formulario al /registro, para que  se haga el action. Si quisiesemos usar un action en otro fichero, pondriamos la ruta de ese fichero
-  const handleRegistro = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetcher.submit(
-      { name, email, password },
-      { method: "post", action: "/registro" }
-    );
-  };
-
   return (
     <div className="registro">
       <b className="registro-titulo">CREA TU CUENTA</b>
       <div className="registro-contenedor">
-        <form className="registro-formulario" onSubmit={handleRegistro}>
+        {/* Usamos fetcher.Form en lugar de un <form> estándar */}
+        <fetcher.Form
+          method="post"
+          action="/registro"
+          className="registro-formulario"
+        >
           <div className="registro-grupoinput">
             <label htmlFor="correo">
               <p>Correo electrónico: </p>
             </label>
-            <input
-              type="email"
-              id="correo"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <input type="email" id="correo" name="email" required />
           </div>
 
           <div className="registro-grupoinput">
             <label htmlFor="nombre">
               <p>Nombre: </p>
             </label>
-            <input
-              type="text"
-              id="nombre"
-              required
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" id="nombre" name="name" required />
           </div>
 
           <div className="registro-grupoinput">
             <label htmlFor="contrasena">
               <p>Contraseña: </p>
             </label>
-            <input
-              type="password"
-              id="contrasena"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <input type="password" id="contrasena" name="password" required />
           </div>
 
           <button type="submit" className="registro-boton">
             Enviar
           </button>
-        </form>
+        </fetcher.Form>
 
-        {fetcher.data && fetcher.data.success && fetcher.data.user && (
-          <p>Usuario creado correctamente: {fetcher.data.user.name}</p>
+        {/* Mostrar mensajes en función de la respuesta del servidor */}
+        {fetcher.data && fetcher.data.success && (
+          <p className="success-message">
+            Usuario creado correctamente. Redirigiendo al login...
+          </p>
         )}
         {fetcher.data && !fetcher.data.success && (
-          <p>Error: {fetcher.data.error}</p>
+          <p className="error-message">Error: {fetcher.data.error}</p>
         )}
       </div>
     </div>
   );
-
-  //El fetcher.data es la respuesta que se obtiene del action, devuelve principalmente dos parametros. El parametro succes que es true or false, y el parámetro user, que contiene todos los parametros del usuario creado. En este caso seria user{name:____, email:_____, contraseña:_____}. Si fetcher devolviese un error tambien devolveria un parametro error.
 }

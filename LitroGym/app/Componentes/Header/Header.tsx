@@ -1,24 +1,6 @@
-import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-// eslint-disable-next-line import/no-unresolved
-import { getSession } from "~/services/session";
-// eslint-disable-next-line import/no-unresolved
-
-export const loader: LoaderFunction = async ({ request }) => {
-  // Obtén la sesión desde las cookies
-  const cookieHeader = request.headers.get("Cookie");
-  const session = await getSession(cookieHeader);
-
-  // Obtén el userId de la sesión
-  const userId = session.get("userId");
-  const userName = session.get("userName");
-
-  // Mostrar el userId en el servidor
-  console.log("Valor de userId en la sesión:", userId);
-  console.log("Valor de userName en la sesión:", userName);
-
-  return json({ userId, userName });
-};
+import "../../services/icons";
+import { UserIcon } from "../../services/icons";
 
 export default function Header() {
   const { userId, userName } = useLoaderData<{
@@ -111,8 +93,9 @@ export default function Header() {
             </button>
 
             <Link to="LogIn">
-              <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f]">
-                {userName}
+              <button className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center">
+                <UserIcon />
+                <span>{userName?.toUpperCase()}</span>
               </button>
             </Link>
           </div>
