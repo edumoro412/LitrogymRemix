@@ -28,7 +28,8 @@ model User {
 model Ejercicio {
   id                 String       @id @default(cuid()) 
   nombre             String
-  musculo             String
+  musculo            String
+  video              String?   @default("")
   usuariosFavoritos  UserEjercicio[]       @relation("UserFavoritosEjercicios")
   rutinas            Rutina[]     @relation("EjercicioRutinas")
   createdAt          DateTime     @default(now())

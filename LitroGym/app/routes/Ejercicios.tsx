@@ -19,7 +19,7 @@ export default function Ejercicios() {
 
   return (
     <div className="bg-custom-color flex flex-col items-center justify-start min-h-screen">
-      <form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-green-600 md:w-80 mx-auto">
+      <form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-blue-600 md:w-80 mx-auto">
         <button className="px-2">
           <SearchIcon />
         </button>
@@ -33,7 +33,6 @@ export default function Ejercicios() {
         />
       </form>
 
-      {/* Lista de ejercicios centrada */}
       <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
         {data.map((ejercicio: Ejercicio) => (
           <li

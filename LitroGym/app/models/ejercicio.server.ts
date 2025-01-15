@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import db from "~/db.server";
 
 export function todosEjercicios(query: string | null) {
