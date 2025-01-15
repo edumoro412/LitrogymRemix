@@ -1,9 +1,10 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { Link, redirect, useFetcher, useLoaderData } from "@remix-run/react";
 // eslint-disable-next-line import/no-unresolved
-import { commitSession, getSession, destroySession } from "~/services/session";
+import { commitSession, getSession } from "~/services/session";
 // eslint-disable-next-line import/no-unresolved
 import { AuthenticateUser } from "~/services/user.services";
+import { z } from "zod";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
