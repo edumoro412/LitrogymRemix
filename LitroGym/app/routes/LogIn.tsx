@@ -4,7 +4,6 @@ import { Link, redirect, useFetcher, useLoaderData } from "@remix-run/react";
 import { commitSession, getSession } from "~/services/session";
 // eslint-disable-next-line import/no-unresolved
 import { AuthenticateUser } from "~/services/user.services";
-import { z } from "zod";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
@@ -139,7 +138,10 @@ export default function LogIn() {
               ¡Hola, {userName.toUpperCase()}!
             </h2>
 
-            <button className="bg-red-600 py-3 px-6 rounded-3xl w-[70%] text-white font-semibold text-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105">
+            <button
+              className="bg-red-600 py-3 px-6 rounded-3xl w-[70%] text-white font-semibold text-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
+              onClick={() => (window.location.href = "Logout")}
+            >
               Cerrar sesión
             </button>
           </div>
