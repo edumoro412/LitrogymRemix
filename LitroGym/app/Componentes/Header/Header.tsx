@@ -1,5 +1,4 @@
 import { Link, useLoaderData } from "@remix-run/react";
-import "../../services/icons";
 import { UserIcon } from "../../services/icons";
 
 export default function Header() {
