@@ -42,6 +42,16 @@ export default function Ejercicios() {
             <h1 className="text-2xl text-center font-extrabold first-letter:uppercase">
               {ejercicio.nombre}
             </h1>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full my-2"
+              src={`/vids/${ejercicio.video}`}
+            >
+              Tu navegador no soporta la reproducción de videos.
+            </video>
           </li>
         ))}
       </ul>
