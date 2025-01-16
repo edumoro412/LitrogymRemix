@@ -50,3 +50,14 @@ export async function AuthenticateUser(
 
   return { id: user.id, name: user.name };
 }
+
+export async function EjerciciosFavoritos(userId: string) {
+  return db.userEjercicio.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      ejercicio: true,
+    },
+  });
+}
