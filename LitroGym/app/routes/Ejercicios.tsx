@@ -1,21 +1,36 @@
 import { Ejercicio } from "@prisma/client";
 import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
+import { useState } from "react";
 // eslint-disable-next-line import/no-unresolved
 import { todosEjercicios } from "~/models/ejercicio.server";
 // eslint-disable-next-line import/no-unresolved
-import { SearchIcon } from "~/services/icons";
+import { ConLike, SearchIcon, SinLike } from "~/services/icons";
+// eslint-disable-next-line import/no-unresolved
+import { getSession } from "~/services/session";
 
 export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("cookie"));
+  const userId = session.get("userId");
+
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search");
   const ejercicios = await todosEjercicios(search);
-  return json(ejercicios);
+
+  return json({ data: ejercicios, userId });
 };
 
 export default function Ejercicios() {
-  const data = useLoaderData<Ejercicio[]>();
+  const { data, userId } = useLoaderData<{
+    data: Ejercicio[];
+    userId: string | undefined;
+  }>();
   const [searchParams] = useSearchParams();
+  const [liked, setLiked] = useState(false);
+
+  const handleClick = () => {
+    setLiked(!liked);
+  };
 
   return (
     <div className="bg-custom-color flex flex-col items-center justify-start min-h-screen">
@@ -52,6 +67,15 @@ export default function Ejercicios() {
             >
               Tu navegador no soporta la reproducción de videos.
             </video>
+
+            {userId && (
+              <button
+                className="w-full flex justify-center items-center"
+                onClick={handleClick}
+              >
+                {liked ? <ConLike /> : <SinLike />}
+              </button>
+            )}
           </li>
         ))}
       </ul>
