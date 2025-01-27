@@ -1,5 +1,7 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { Link, redirect, useFetcher, useLoaderData } from "@remix-run/react";
+import { useState } from "react";
+import { Ojo, OjoCerrado } from "~/services/icons";
 // eslint-disable-next-line import/no-unresolved
 import { commitSession, getSession } from "~/services/session";
 // eslint-disable-next-line import/no-unresolved
@@ -61,6 +63,11 @@ export default function LogIn() {
     userName: string | undefined;
     ejerciciosFavoritos: Awaited<ReturnType<typeof EjerciciosFavoritos>>;
   }>();
+  const [type, setType] = useState("password");
+
+  function setInputType(type: string) {
+    setType(type);
+  }
 
   if (userName == undefined) {
     return (
@@ -92,12 +99,21 @@ export default function LogIn() {
                 Contraseña:
               </label>
               <input
-                type="password"
+                type={type}
                 name="contrasena"
                 id="contrasena"
                 required
                 className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg"
               />
+              <button
+                type="button"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                onMouseDown={() => setInputType("text")}
+                onMouseUp={() => setInputType("password")}
+                onMouseLeave={() => setInputType("password")}
+              >
+                {type == "text" ? <Ojo /> : <OjoCerrado />}
+              </button>
             </div>
 
             <button
