@@ -6,6 +6,9 @@ export default {
     extend: {
       colors: {
         "custom-color": "#00BFB3",
+        primary: "var(--color-primary)",
+        "primary-light": "var(--color-primary-light)",
+        background: "white",
       },
       fontFamily: {
         sans: [

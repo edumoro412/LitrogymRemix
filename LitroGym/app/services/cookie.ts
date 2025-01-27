@@ -8,3 +8,5 @@ export const sessionCookie = createCookie("session_cookie", {
   httpOnly: true,
   secure: true,
 });
+
+export const themeCookie = createCookie("LitroGym__theme");

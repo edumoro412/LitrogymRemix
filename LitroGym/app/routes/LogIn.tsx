@@ -1,16 +1,25 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { Link, redirect, useFetcher, useLoaderData } from "@remix-run/react";
+import { useState } from "react";
+import { Ojo, OjoCerrado } from "~/services/icons";
 // eslint-disable-next-line import/no-unresolved
 import { commitSession, getSession } from "~/services/session";
 // eslint-disable-next-line import/no-unresolved
-import { AuthenticateUser } from "~/services/user.services";
+import {
+  AuthenticateUser,
+  EjerciciosFavoritos,
+  // eslint-disable-next-line import/no-unresolved
+} from "~/services/user.services";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
   const session = await getSession(cookieHeader);
 
   const userName = session.get("userName");
-  return { userName };
+  const userId = session.get("userId");
+
+  const ejerciciosFavoritos = await EjerciciosFavoritos(userId);
+  return { userName, ejerciciosFavoritos };
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -50,7 +59,15 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function LogIn() {
   const fetcher = useFetcher<{ success: boolean; error?: string }>();
-  const { userName } = useLoaderData<{ userName: string | undefined }>();
+  const { userName, ejerciciosFavoritos } = useLoaderData<{
+    userName: string | undefined;
+    ejerciciosFavoritos: Awaited<ReturnType<typeof EjerciciosFavoritos>>;
+  }>();
+  const [type, setType] = useState("password");
+
+  function setInputType(type: string) {
+    setType(type);
+  }
 
   if (userName == undefined) {
     return (
@@ -82,12 +99,21 @@ export default function LogIn() {
                 Contraseña:
               </label>
               <input
-                type="password"
+                type={type}
                 name="contrasena"
                 id="contrasena"
                 required
                 className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg"
               />
+              <button
+                type="button"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                onMouseDown={() => setInputType("text")}
+                onMouseUp={() => setInputType("password")}
+                onMouseLeave={() => setInputType("password")}
+              >
+                {type == "text" ? <Ojo /> : <OjoCerrado />}
+              </button>
             </div>
 
             <button
@@ -144,6 +170,30 @@ export default function LogIn() {
             >
               Cerrar sesión
             </button>
+
+            <h3>Tus ejercicios favoritos</h3>
+            <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
+              {ejerciciosFavoritos.map((ejercicio) => (
+                <li
+                  key={ejercicio.ejercicioId}
+                  className="border-2 border-gray-300 rounded-md p-4 w-[calc(100vw-2rem)] flex-none snap-center h-fit md:w-96 mx-auto"
+                >
+                  <h1 className="text-2xl text-center font-extrabold first-letter:uppercase">
+                    {ejercicio.ejercicio.nombre}
+                  </h1>
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full my-2"
+                    src={`/vids/${ejercicio.ejercicio.video}`}
+                  >
+                    Tu navegador no soporta la reproducción de videos.
+                  </video>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </>
