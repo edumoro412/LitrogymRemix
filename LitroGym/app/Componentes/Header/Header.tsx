@@ -14,92 +14,60 @@ export default function Header() {
     }
   }
 
-  if (userId === undefined) {
-    return (
-      <>
-        <div className=" bg-black flex w-full h-[15vh] text-white text-[130%] flex-row justify-start">
-          <div className=" flex w-1/2 items-center justify-start">
-            <img
-              src="/imgs/logo.png"
-              alt="Logo"
-              id="logo"
-              className="h-full w-auto"
-            />
-            <p className="text-[190%] ml-[5%]">
-              <b>LITROGYM</b>
-            </p>
-          </div>
-          <div className=" flex w-1/2 justify-around">
-            <Link to="/">
-              <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
-                HOME
-              </button>
-            </Link>
-            <Link to="LogIn">
-              <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
-                INICIA SESION
-              </button>
-            </Link>
-            <Link to="QuienesSomos">
-              <button className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
-                ¿QUIENES SOMOS?
-              </button>
-            </Link>
+  return (
+    <header className="bg-black flex w-screen h-[15vh] text-white flex-row justify-between px-4">
+      {/* Logo y Nombre */}
+      <div className="flex items-center">
+        <img
+          src="/imgs/logo.png"
+          alt="Logo"
+          className="h-16 sm:h-20 md:h-full w-auto"
+        />
+        <p className="text-xl md:text-[190%] ml-2 hidden md:block">
+          <b>LITROGYM</b>
+        </p>
+      </div>
 
-            <button
-              className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]"
-              onClick={ScrollFooter}
-            >
-              CONTACTO
+      {/* Botones de navegación */}
+      <div className="flex justify-around items-center gap-4">
+        <Link to="/" className="block w-full h-full">
+          <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
+            HOME
+          </button>
+        </Link>
+
+        {!userId && (
+          <Link to="LogIn" className="block w-full h-full">
+            <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
+              INICIA SESION
             </button>
-          </div>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className=" bg-black flex w-full h-[15vh] text-white text-[130%] flex-row justify-start">
-          <div className=" flex w-1/2 items-center justify-start">
-            <img
-              src="/imgs/logo.png"
-              alt="Logo"
-              id="logo"
-              className="h-full w-auto"
-            />
-            <p className="text-[190%] ml-[5%]">
-              <b>LITROGYM</b>
-            </p>
-          </div>
-          <div className=" flex w-1/2 justify-around">
-            <Link to="/">
-              <button className=" text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
-                HOME
-              </button>
-            </Link>
+          </Link>
+        )}
 
-            <Link to="QuienesSomos">
-              <button className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]">
-                ¿QUIENES SOMOS?
-              </button>
-            </Link>
+        <Link to="QuienesSomos" className="block w-full h-full">
+          <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
+            ¿QUIENES SOMOS?
+          </button>
+        </Link>
 
-            <button
-              className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa]"
-              onClick={ScrollFooter}
-            >
-              CONTACTO
+        <button
+          className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center"
+          onClick={ScrollFooter}
+        >
+          CONTACTO
+        </button>
+
+        {userId && (
+          <Link to="LogIn" className="block w-full h-full">
+            <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center">
+              <UserIcon />
+              <span className="text-xs sm:text-sm md:text-base">
+                {userName?.toUpperCase()}
+              </span>
             </button>
-
-            <Link to="LogIn">
-              <button className="text-[70%] border-0 text-white bg-black h-full w-auto p-[30px] hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center">
-                <UserIcon />
-                <span>{userName?.toUpperCase()}</span>
-              </button>
-            </Link>
-          </div>
-        </div>
-      </>
-    );
-  }
+          </Link>
+        )}
+      </div>
+    </header>
+  );
 }
