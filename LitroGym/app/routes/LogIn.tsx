@@ -1,10 +1,10 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { Link, redirect, useFetcher, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
+// eslint-disable-next-line import/no-unresolved
 import { Ojo, OjoCerrado } from "~/services/icons";
 // eslint-disable-next-line import/no-unresolved
 import { commitSession, getSession } from "~/services/session";
-// eslint-disable-next-line import/no-unresolved
 import {
   AuthenticateUser,
   EjerciciosFavoritos,
@@ -14,10 +14,8 @@ import {
 export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
   const session = await getSession(cookieHeader);
-
   const userName = session.get("userName");
   const userId = session.get("userId");
-
   const ejerciciosFavoritos = await EjerciciosFavoritos(userId);
   return { userName, ejerciciosFavoritos };
 };
@@ -30,7 +28,6 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const userId = await AuthenticateUser(email, password);
 
-    // Si el usuario tiene la contraseña incorrecta o el email no se encuentra en la base de datos lanzará este error
     if (userId == null) {
       return json(
         { success: false, error: "La contraseña o el email son incorrectos" },
@@ -38,7 +35,6 @@ export const action: ActionFunction = async ({ request }) => {
       );
     }
 
-    // Si el usuario es correcto
     const cookieHeader = request.headers.get("cookie");
     const session = await getSession(cookieHeader);
     session.set("userId", userId.id);
@@ -77,7 +73,7 @@ export default function LogIn() {
       >
         <div className="bg-gradient-to-b from-gray-500/50 to-black w-full h-full absolute top-0 left-0"></div>
 
-        <div className="bg-black bg-opacity-65 w-[35vw] h-[60%] flex flex-col justify-around items-center p-4 rounded-2xl shadow-xl relative">
+        <div className="bg-black bg-opacity-65 w-[90vw] sm:w-[70vw] md:w-[40vw] lg:w-[30vw] h-[60%] flex flex-col justify-around items-center p-4 rounded-2xl shadow-xl relative">
           <b className="text-center text-3xl my-2">INICIAR SESIÓN</b>
 
           <fetcher.Form method="post" className="flex flex-col w-full">
@@ -90,35 +86,35 @@ export default function LogIn() {
                 name="email"
                 id="email"
                 required
-                className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg"
+                className="w-full mt-2 p-2 rounded-lg text-black text-lg"
               />
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="contrasena" className="text-xl">
-                Contraseña:
-              </label>
+            <label htmlFor="contrasena" className="text-xl">
+              Contraseña:
+            </label>
+            <div className="flex w-full ">
               <input
                 type={type}
                 name="contrasena"
                 id="contrasena"
                 required
-                className="w-5/6 mt-2 p-2 rounded-lg text-black text-lg"
+                className=" absolute w-[90%] mt-2 p-2 rounded-lg text-black text-lg pr-12"
               />
               <button
                 type="button"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                className=" relative p-2 "
                 onMouseDown={() => setInputType("text")}
                 onMouseUp={() => setInputType("password")}
                 onMouseLeave={() => setInputType("password")}
               >
-                {type == "text" ? <Ojo /> : <OjoCerrado />}
+                {type === "text" ? <Ojo /> : <OjoCerrado />}
               </button>
             </div>
 
             <button
               type="submit"
-              className="w-1/2 mx-auto mt-6 p-3 text-white text-xl rounded-lg bg-blue-500 hover:bg-blue-700"
+              className="w-full mt-6 p-3 text-white text-xl rounded-lg bg-blue-500 hover:bg-blue-700"
             >
               Enviar
             </button>
@@ -152,51 +148,49 @@ export default function LogIn() {
     );
   } else {
     return (
-      <>
-        <div
-          className="bg-black bg-cover bg-center bg-no-repeat h-screen flex flex-col items-center justify-center relative text-white"
-          style={{ backgroundImage: 'url("/imgs/fotoFondo.jpg")' }}
-        >
-          <div className="bg-gradient-to-b from-black/30 to-black w-full h-full absolute top-0 left-0"></div>
+      <div
+        className="bg-black bg-cover bg-center bg-no-repeat h-screen flex flex-col items-center justify-center relative text-white"
+        style={{ backgroundImage: 'url("/imgs/fotoFondo.jpg")' }}
+      >
+        <div className="bg-gradient-to-b from-black/30 to-black w-full h-full absolute top-0 left-0"></div>
 
-          <div className="bg-black bg-opacity-70 w-[40vw] max-w-[450px] h-[50%] flex flex-col justify-evenly items-center p-6 rounded-3xl shadow-2xl relative z-10">
-            <h2 className="text-center text-4xl font-bold text-gray-100 mb-4">
-              ¡Hola, {userName.toUpperCase()}!
-            </h2>
+        <div className="bg-black bg-opacity-70 w-[90vw] sm:w-[70vw] md:w-[40vw] lg:w-[30vw] h-[50%] flex flex-col justify-evenly items-center p-6 rounded-3xl shadow-2xl relative z-10">
+          <h2 className="text-center text-4xl font-bold text-gray-100 mb-4">
+            ¡Hola, {userName.toUpperCase()}!
+          </h2>
 
-            <button
-              className="bg-red-600 py-3 px-6 rounded-3xl w-[70%] text-white font-semibold text-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
-              onClick={() => (window.location.href = "Logout")}
-            >
-              Cerrar sesión
-            </button>
+          <button
+            className="bg-red-600 py-3 px-6 rounded-3xl w-[70%] text-white font-semibold text-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
+            onClick={() => (window.location.href = "Logout")}
+          >
+            Cerrar sesión
+          </button>
 
-            <h3>Tus ejercicios favoritos</h3>
-            <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
-              {ejerciciosFavoritos.map((ejercicio) => (
-                <li
-                  key={ejercicio.ejercicioId}
-                  className="border-2 border-gray-300 rounded-md p-4 w-[calc(100vw-2rem)] flex-none snap-center h-fit md:w-96 mx-auto"
+          <h3>Tus ejercicios favoritos</h3>
+          <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
+            {ejerciciosFavoritos.map((ejercicio) => (
+              <li
+                key={ejercicio.ejercicioId}
+                className="border-2 border-gray-300 rounded-md p-4 w-[calc(100vw-2rem)] flex-none snap-center h-fit md:w-96 mx-auto"
+              >
+                <h1 className="text-2xl text-center font-extrabold first-letter:uppercase">
+                  {ejercicio.ejercicio.nombre}
+                </h1>
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full my-2"
+                  src={`/vids/${ejercicio.ejercicio.video}`}
                 >
-                  <h1 className="text-2xl text-center font-extrabold first-letter:uppercase">
-                    {ejercicio.ejercicio.nombre}
-                  </h1>
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full my-2"
-                    src={`/vids/${ejercicio.ejercicio.video}`}
-                  >
-                    Tu navegador no soporta la reproducción de videos.
-                  </video>
-                </li>
-              ))}
-            </ul>
-          </div>
+                  Tu navegador no soporta la reproducción de videos.
+                </video>
+              </li>
+            ))}
+          </ul>
         </div>
-      </>
+      </div>
     );
   }
 }
