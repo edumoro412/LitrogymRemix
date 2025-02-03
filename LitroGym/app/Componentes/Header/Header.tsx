@@ -16,7 +16,6 @@ export default function Header() {
 
   return (
     <header className="bg-black flex w-screen h-[15vh] text-white flex-row justify-between px-4">
-      {/* Logo y Nombre */}
       <div className="flex items-center">
         <img
           src="/imgs/logo.png"
@@ -28,7 +27,6 @@ export default function Header() {
         </p>
       </div>
 
-      {/* Botones de navegación */}
       <div className="flex justify-around items-center gap-4">
         <Link to="/" className="block w-full h-full">
           <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
@@ -58,7 +56,7 @@ export default function Header() {
         </button>
 
         {userId && (
-          <Link to="LogIn" className="block w-full h-full">
+          <Link to="User" className="block w-full h-full">
             <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center">
               <UserIcon />
               <span className="text-xs sm:text-sm md:text-base">

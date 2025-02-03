@@ -22,6 +22,24 @@ export const createUser = async (
   return user;
 };
 
+export function BorrarUsuario(id_user: string) {
+  return db.user.delete({
+    where: {
+      id: id_user,
+    },
+  });
+}
+
+export function CambiarNombre(nombre: string, id_user: string) {
+  return db.user.update({
+    where: {
+      id: id_user,
+    },
+    data: {
+      name: nombre,
+    },
+  });
+}
 export function getUser(email: string) {
   return db.user.findUnique({
     where: {
