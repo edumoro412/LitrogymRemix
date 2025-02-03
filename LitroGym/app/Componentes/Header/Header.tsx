@@ -15,19 +15,19 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-black flex w-screen h-[15vh] text-white flex-row justify-between px-4">
+    <header className="bg-black flex w-full h-[15vh] text-white flex-row justify-between px-4 overflow-x-hidden box-border">
       <div className="flex items-center">
         <img
           src="/imgs/logo.png"
           alt="Logo"
-          className="h-16 sm:h-20 md:h-full w-auto"
+          className="h-16 sm:h-20 md:h-full w-auto max-w-full"
         />
         <p className="text-xl md:text-[190%] ml-2 hidden md:block">
           <b>LITROGYM</b>
         </p>
       </div>
 
-      <div className="flex justify-around items-center gap-4">
+      <div className="flex justify-around items-center gap-4 flex-shrink-0">
         <Link to="/" className="block w-full h-full">
           <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
             HOME
@@ -35,14 +35,14 @@ export default function Header() {
         </Link>
 
         {!userId && (
-          <Link to="LogIn" className="block w-full h-full">
+          <Link to="/login" className="block w-full h-full">
             <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
               INICIA SESION
             </button>
           </Link>
         )}
 
-        <Link to="QuienesSomos" className="block w-full h-full">
+        <Link to="/quienessomos" className="block w-full h-full">
           <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex items-center justify-center">
             ¿QUIENES SOMOS?
           </button>
@@ -56,7 +56,8 @@ export default function Header() {
         </button>
 
         {userId && (
-          <Link to="User" className="block w-full h-full">
+          <Link to="/user" className="block w-full h-full">
+            {" "}
             <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center">
               <UserIcon />
               <span className="text-xs sm:text-sm md:text-base">

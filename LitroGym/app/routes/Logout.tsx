@@ -14,7 +14,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return redirect("/", {
     headers: {
-      "Set-Cookie": cookie,
+      "Set-Cookie": await destroySession(session),
     },
   });
 };
