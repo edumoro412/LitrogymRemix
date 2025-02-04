@@ -1,9 +1,16 @@
-import { LoaderFunction, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useState } from "react"; // Importar useState para manejar el estado local
+import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
+import { Form, useLoaderData } from "@remix-run/react";
 // eslint-disable-next-line import/no-unresolved
-import { getSession } from "~/services/session";
+import { EditIcon, SaveIcon } from "~/services/icons";
 // eslint-disable-next-line import/no-unresolved
-import { EjerciciosFavoritos } from "~/services/user.services";
+import { getSession, commitSession } from "~/services/session";
+// eslint-disable-next-line import/no-unresolved
+import {
+  CambiarNombre,
+  EjerciciosFavoritos,
+  // eslint-disable-next-line import/no-unresolved
+} from "~/services/user.services";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
@@ -19,13 +26,54 @@ export const loader: LoaderFunction = async ({ request }) => {
   return { userName, ejerciciosFavoritos };
 };
 
+export const action: ActionFunction = async ({ request }) => {
+  const cookieHeader = request.headers.get("cookie");
+  const session = await getSession(cookieHeader);
+  const userId = session.get("userId");
+
+  const formData = await request.formData();
+  const newUserName = formData.get("newUserName")?.toString().toLowerCase();
+
+  if (!newUserName) {
+    return { error: "El nombre no puede estar vacío" };
+  }
+
+  console.log("Intentando cambiar nombre a:", newUserName);
+  console.log("Usuario:", userId);
+
+  const result = await CambiarNombre(newUserName, userId);
+  console.log("Resultado:", result);
+
+  session.set("userName", newUserName);
+
+  return redirect("/user", {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
+};
+
 export default function UserDashboard() {
   const data = useLoaderData<{
     userName: string;
     ejerciciosFavoritos: Awaited<ReturnType<typeof EjerciciosFavoritos>>;
   }>();
 
-  const { userName, ejerciciosFavoritos = [] } = data || {};
+  const { userName: initialUserName, ejerciciosFavoritos = [] } = data || {};
+
+  // Estado local para manejar la edición del nombre
+  const [isEditing, setIsEditing] = useState(false);
+  const [userName, setUserName] = useState(initialUserName);
+
+  // Función para manejar el clic en el ícono de edición
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  // Función para manejar el cambio en el input
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+  };
 
   return (
     <div
@@ -36,7 +84,37 @@ export default function UserDashboard() {
 
       <div className="bg-black bg-opacity-70 w-[90vw] sm:w-[70vw] md:w-[60vw] lg:w-[60vw] h-[80%] flex flex-col justify-evenly items-center p-6 rounded-3xl shadow-2xl relative z-10">
         <h2 className="text-center text-4xl font-bold text-gray-100 m-4">
-          {userName ? `¡Hola, ${userName.toUpperCase()}!` : ""}
+          <span className="flex items-center justify-center gap-2">
+            {isEditing ? (
+              <Form
+                method="post"
+                reloadDocument
+                className="flex items-center justify-center w-full"
+              >
+                <p className="text-white">¡Hola, </p>
+                <input
+                  type="text"
+                  value={userName}
+                  onChange={handleNameChange}
+                  name="newUserName"
+                  className="bg-transparent border-b-2 border-white text-white focus:outline-none text-center w-1/2"
+                />
+                <button type="submit">
+                  <SaveIcon />
+                </button>
+              </Form>
+            ) : (
+              <>
+                {userName ? `¡Hola, ${userName.toUpperCase()}!` : ""}
+                <button
+                  onClick={handleEditClick}
+                  className="focus:outline-none"
+                >
+                  <EditIcon />
+                </button>
+              </>
+            )}
+          </span>
         </h2>
 
         <button
