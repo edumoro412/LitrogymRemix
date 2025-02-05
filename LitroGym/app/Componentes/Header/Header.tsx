@@ -130,24 +130,6 @@ export default function Header() {
         >
           CONTACTO
         </button>
-        <Link to="settings.app">
-          <button
-            className="w-28 h-full flex items-center justify-center text-[70%] rounded-md transition-all duration-300"
-            style={{
-              backgroundColor: "var(--color-primary)",
-              color: "white",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                "var(--color-primary-light)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "var(--color-primary)")
-            }
-          >
-            AJUSTES
-          </button>
-        </Link>
       </div>
     </div>
   );

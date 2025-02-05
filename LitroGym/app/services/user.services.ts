@@ -61,3 +61,9 @@ export async function EjerciciosFavoritos(userId: string) {
     },
   });
 }
+export function getUserColor(userId: string) {
+  return db.user.findUnique({
+    where: { id: userId },
+    select: { color: true },
+  });
+}

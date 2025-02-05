@@ -10,6 +10,7 @@ import {
   EjerciciosFavoritos,
   // eslint-disable-next-line import/no-unresolved
 } from "~/services/user.services";
+import { set } from "zod";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
@@ -163,6 +164,26 @@ export default function LogIn() {
             <h2 className="text-center text-4xl font-bold text-gray-100 mb-4">
               ¡Hola, {userName.toUpperCase()}!
             </h2>
+
+            <Link to="../settings.app">
+              <button
+                className="px-6 py-3 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+                style={{
+                  backgroundColor: "var(--color-primary)",
+                  color: "white",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor =
+                    "var(--color-primary-light)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor =
+                    "var(--color-primary)")
+                }
+              >
+                AJUSTES
+              </button>
+            </Link>
 
             <button
               className="bg-red-600 py-3 px-6 rounded-3xl w-[70%] text-white font-semibold text-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"

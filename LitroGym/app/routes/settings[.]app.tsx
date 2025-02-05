@@ -3,33 +3,49 @@ import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { z } from "zod";
 import { themeCookie } from "../services/cookie";
 import { validateForm } from "../services/validation";
+import prisma from "~/db.server";
+import { getSession } from "~/services/session";
+import { getUserFromSession } from "../services/auth";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const theme = await themeCookie.parse(cookieHeader);
+  const session = await getSession(request.headers.get("Cookie"));
+  const userId = session.get("userId");
 
-  return { theme: typeof theme === "string" ? theme : "black" };
+  if (!userId) {
+    return json({ theme: "black" }); // Tema por defecto si no hay usuario autenticado
+  }
+
+  const userData = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { color: true },
+  });
+
+  return json({ theme: userData?.color ?? "black" });
 }
 
-const themeSchema = z.object({
-  theme: z.string(),
-});
-
 export async function action({ request }: ActionFunctionArgs) {
+  const session = await getSession(request.headers.get("cookie"));
+  const userId = session.get("userId");
   const formData = await request.formData();
-  return validateForm(
-    formData,
-    themeSchema,
-    async ({ theme }) =>
-      json(
-        { theme },
-        {
-          headers: {
-            "Set-Cookie": await themeCookie.serialize(theme),
-          },
-        }
-      ),
-    (errors) => json({ errors }, { status: 400 })
+  const theme = formData.get("theme") as string;
+
+  if (!theme) {
+    return json({ errors: { theme: "El tema es requerido" } }, { status: 400 });
+  }
+
+  // Actualizar el color en la base de datos
+  await prisma.user.update({
+    where: { id: userId },
+    data: { color: theme },
+  });
+
+  return json(
+    { theme },
+    {
+      headers: {
+        "Set-Cookie": await themeCookie.serialize(theme), // Guardar también en la cookie
+      },
+    }
   );
 }
 

@@ -1,68 +1,33 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
-import { themeCookie } from "../services/cookie";
-
-function getTheme(color: string) {
-  switch (color) {
-    case "red": {
-      return {
-        colorPrimary: "#f22524",
-        colorPrimaryLight: "#f56663",
-      };
-    }
-    case "orange": {
-      return {
-        colorPrimary: "#ff4b00",
-        colorPrimaryLight: "#ff814d",
-      };
-    }
-    case "yellow": {
-      return {
-        colorPrimary: "#cc9800",
-        colorPrimaryLight: "#ffbf00",
-      };
-    }
-    case "green": {
-      return {
-        colorPrimary: "#00743e",
-        colorPrimaryLight: "#4c9d77",
-      };
-    }
-    case "blue": {
-      return {
-        colorPrimary: "#01a3e1",
-        colorPrimaryLight: "#30c5fe",
-      };
-    }
-    case "purple": {
-      return {
-        colorPrimary: "#5325c0",
-        colorPrimaryLight: "#8666d2",
-      };
-    }
-    default: {
-      return {
-        colorPrimary: "#000000",
-        colorPrimaryLight: "#333333",
-      };
-    }
-  }
-}
+import { getSession } from "~/services/session";
+import prisma from "~/db.server";
+import { getTheme } from "~/services/theme";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookieValue = await themeCookie.parse(cookieHeader);
-  const theme = getTheme(cookieValue);
+  const session = await getSession(request.headers.get("Cookie"));
+  const userId = session.get("userId");
+
+  let userColor = "black"; // Color por defecto
+
+  if (userId) {
+    const userData = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { color: true },
+    });
+
+    userColor = userData?.color ?? "black";
+  }
+
+  const theme = getTheme(userColor);
 
   const data = `
-  :root{
+  :root {
     --color-primary: ${theme.colorPrimary};
-    --color-primary-light: ${theme.colorPrimaryLight};  
+    --color-primary-light: ${theme.colorPrimaryLight};
   }
   `;
 
   return new Response(data, {
-    headers: {
-      "Content-Type": "text/css",
-    },
+    headers: { "Content-Type": "text/css" },
   });
 }
