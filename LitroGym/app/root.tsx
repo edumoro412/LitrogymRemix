@@ -10,6 +10,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import Header from "./Componentes/Header/Header";
 import Footer from "./Componentes/Footer/Footer";
@@ -23,15 +24,12 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  // Obtén la sesión desde las cookies
   const cookieHeader = request.headers.get("Cookie");
   const session = await getSession(cookieHeader);
 
-  // Obtén el userId de la sesión
   const userId = session.get("userId");
   const userName = session.get("userName");
 
-  // Mostrar el userId en el servidor
   console.log("Valor de userId en la sesión:", userId);
   console.log("Valor de userName en la sesión:", userName);
 
@@ -69,9 +67,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const { userId, userName } = useLoaderData<typeof loader>();
+
   return (
     <>
-      <Header />
+      <Header userId={userId} userName={userName} />
       <Outlet />
       <Footer />
     </>

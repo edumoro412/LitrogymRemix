@@ -1,12 +1,12 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { UserIcon } from "../../services/icons";
 
-export default function Header() {
-  const { userId, userName } = useLoaderData<{
-    userId: string | undefined;
-    userName: string | undefined;
-  }>();
+interface HeaderProps {
+  userId?: string;
+  userName?: string;
+}
 
+export default function Header({ userId, userName }: HeaderProps) {
   function ScrollFooter() {
     const footer = document.querySelector(".footer");
     if (footer) {
@@ -57,7 +57,6 @@ export default function Header() {
 
         {userId && (
           <Link to="/user" className="block w-full h-full">
-            {" "}
             <button className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center">
               <UserIcon />
               <span className="text-xs sm:text-sm md:text-base">
