@@ -44,6 +44,7 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "Styles/Registro.css" },
   { rel: "stylesheet", href: "Styles/Alimentacion.css" },
   { rel: "stylesheet", href: "Styles/Rutina.css" },
+  { rel: "stylesheet", href: "Styles/recetas.css" },
   { rel: "stylesheet", href: "Styles/QuienesSomos.css" },
 ];
 
