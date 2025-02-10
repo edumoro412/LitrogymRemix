@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "remix": "^2.15.3"
+  }
+}
