@@ -1,12 +1,13 @@
 import { useState } from "react"; // Importar useState para manejar el estado local
 import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 // eslint-disable-next-line import/no-unresolved
 import { EditIcon, SaveIcon } from "~/services/icons";
 // eslint-disable-next-line import/no-unresolved
-import { getSession, commitSession } from "~/services/session";
+import { getSession, commitSession, destroySession } from "~/services/session";
 // eslint-disable-next-line import/no-unresolved
 import {
+  BorrarUsuario,
   CambiarNombre,
   EjerciciosFavoritos,
   // eslint-disable-next-line import/no-unresolved
@@ -30,27 +31,40 @@ export const action: ActionFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
   const session = await getSession(cookieHeader);
   const userId = session.get("userId");
+  console.log(userId);
 
   const formData = await request.formData();
-  const newUserName = formData.get("newUserName")?.toString().toLowerCase();
+  const action = formData.get("action")?.toString();
 
-  if (!newUserName) {
-    return { error: "El nombre no puede estar vacío" };
+  if (action === "borrarCuenta") {
+    await BorrarUsuario(userId);
+    await destroySession(session);
+    return redirect("/Logout", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
+  } else {
+    const newUserName = formData.get("newUserName")?.toString().toLowerCase();
+
+    if (!newUserName) {
+      return { error: "El nombre no puede estar vacío" };
+    }
+
+    console.log("Intentando cambiar nombre a:", newUserName);
+    console.log("Usuario:", userId);
+
+    const result = await CambiarNombre(newUserName, userId);
+    console.log("Resultado:", result);
+
+    session.set("userName", newUserName);
+
+    return redirect("/user", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
   }
-
-  console.log("Intentando cambiar nombre a:", newUserName);
-  console.log("Usuario:", userId);
-
-  const result = await CambiarNombre(newUserName, userId);
-  console.log("Resultado:", result);
-
-  session.set("userName", newUserName);
-
-  return redirect("/user", {
-    headers: {
-      "Set-Cookie": await commitSession(session),
-    },
-  });
 };
 
 export default function UserDashboard() {
@@ -61,16 +75,13 @@ export default function UserDashboard() {
 
   const { userName: initialUserName, ejerciciosFavoritos = [] } = data || {};
 
-  // Estado local para manejar la edición del nombre
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState(initialUserName);
 
-  // Función para manejar el clic en el ícono de edición
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  // Función para manejar el cambio en el input
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   };
@@ -83,6 +94,16 @@ export default function UserDashboard() {
       <div className="bg-gradient-to-b from-black/30 to-black w-full h-full absolute top-0 left-0"></div>
 
       <div className="bg-black bg-opacity-70 w-[90vw] sm:w-[70vw] md:w-[60vw] lg:w-[60vw] h-[80%] flex flex-col justify-evenly items-center p-6 rounded-3xl shadow-2xl relative z-10">
+        <Form method="post" reloadDocument>
+          <button
+            type="submit"
+            className="bg-red-600 py-3 px-6 rounded-lg hover:bg-red-700"
+            name="action"
+            value="borrarCuenta"
+          >
+            Borrar Cuenta
+          </button>
+        </Form>
         <h2 className="text-center text-4xl font-bold text-gray-100 m-4">
           <span className="flex items-center justify-center gap-2">
             {isEditing ? (
