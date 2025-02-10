@@ -1,0 +1,295 @@
+.recetas {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(175, 175, 175, 0.5),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/fotoFondo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    color: white;
+    margin-bottom: 3%;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+  }
+  
+  .titulo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .titulo p {
+    font-size: 250%;
+  }
+  
+  .flip-container {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: transparent;
+    width: 50vh;
+    height: 40vh;
+    perspective: 1000px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.75, 0, 0.85, 1);
+  }
+  
+  .card,
+  card p {
+    display: block;
+  }
+  
+  .card p,
+  .card button {
+    color: #fff;
+  }
+  
+  .flip-container:hover .card {
+    transform: rotateY(180deg);
+  }
+  
+  .frente,
+  .dorso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    font-size: 210%;
+  }
+  
+  .frente {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    display: flex;
+  }
+  
+  .dorso {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    transform: rotateY(180deg);
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .dorso p {
+    font-size: 60%;
+  }
+  
+  .dorso a {
+    display: flex;
+    width: 35%;
+    height: 15%;
+    border-radius: 2cap;
+    border: 2px solid #fff;
+    background: transparent;
+    font-size: 40%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dorso a:hover {
+    color: rgb(35, 65, 173);
+    border-color: rgb(35, 65, 173);
+  }
+  table {
+    width: 80%;
+    height: 35%;
+    border-collapse: collapse;
+  }
+  td {
+    font-size: 40%;
+    border: 1px solid white;
+  }
+  a {
+    background: none;
+    color: white;
+    border: none;
+    text-decoration: none;
+  }
+  .volver {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .volver button {
+    height: 200%;
+    width: 10%;
+    border-radius: 2cap;
+    background: rgb(60, 135, 255);
+    color: white;
+    border: none;
+    font-size: 110%;
+  }
+  .volver button:hover {
+    background-color: rgb(35, 65, 173);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+
+  #pollo1 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/polloPicante.jpg");
+  }
+  #pollo2 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/estofadoPollo.jpg");
+  }
+  #pollo3 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/pastaPollo.jpg");
+  }
+  #carnes1 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/SandwichTernera.jpg");
+  }
+  #carnes2 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/fajitasHalloumi.jpg");
+  }
+  #carnes3 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/ramenTernera.jpg");
+  }
+  #pescado1 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/AtunConBoniato.jpg");
+  }
+  #pescado2 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/SalmonPesto.jpg");
+  }
+  #pescado3 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/ensaladaDePasta.jpg");
+  }
+  #vegana1 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/hamburguesaVegana.jpg");
+  }
+  #vegana2 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/lasañaVegana.jpg");
+  }
+  #vegana3 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/tacosColiflor.jpg");
+  }
+  #postres1 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/tortitas.jpg");
+  }
+  #postres2 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/brownie.jpg");
+  }
+  #postres3 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/gofres.jpg");
+  }
+  #airfryer1 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/pizza.jpg");
+  }
+  #airfryer2 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/palomitas.jpg");
+  }
+  #airfryer3 {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(190, 190, 190, 0.1),
+        rgb(0, 0, 0)
+      ),
+      url("/imgs/donut.jpg");
+  }
