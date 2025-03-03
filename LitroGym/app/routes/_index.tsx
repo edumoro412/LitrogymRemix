@@ -16,7 +16,7 @@ export default function Index() {
           <br />
           <p>
             DIETAS PERSONALIZADAS, RUTINAS DIFERENTES Y AJUSTADAS A CADA UNO,
-            EJERCICIOS ESPECIFICOS Y MUCHO MÁS
+            EJERCICIOS ESPECÍFICOS Y MUCHO MÁS
           </p>
         </div>
       </div>
@@ -24,30 +24,35 @@ export default function Index() {
         <p className="home-endName">
           <b>NUESTROS SERVICIOS</b>
         </p>
-        <div className="home-end-titulos">
-          <p className="home-tipo">ALIMENTACION PERSONALIZADA:</p>
-          <p className="home-tipo">CREA TU RUTINA:</p>
-          <p className="home-tipo">EJERCICIOS ESPECÍFICOS:</p>
-        </div>
-        <div className="home-end-fotos">
-          <Link to="Alimentacion">
-            <img
-              src="/imgs/alimentacion.jpg"
-              alt="Alimentacion"
-              className="img-index"
-            />
-          </Link>
+        <div className="home-end-items">
+          <div className="home-service">
+            <p className="home-tipo">ALIMENTACION PERSONALIZADA:</p>
+            <Link to="Alimentacion">
+              <img
+                src="/imgs/alimentacion.jpg"
+                alt="Alimentacion"
+                className="img-index"
+              />
+            </Link>
+          </div>
 
-          <Link to="Rutina">
-            <img src="/imgs/rutina.jpg" alt="Rutina" className="img-index" />
-          </Link>
-          <Link to="Ejercicios">
-            <img
-              src="/imgs/training.jpg"
-              alt="Ejercicios"
-              className="img-index"
-            />
-          </Link>
+          <div className="home-service">
+            <p className="home-tipo">CREA TU RUTINA:</p>
+            <Link to="Rutina">
+              <img src="/imgs/rutina.jpg" alt="Rutina" className="img-index" />
+            </Link>
+          </div>
+
+          <div className="home-service">
+            <p className="home-tipo">EJERCICIOS ESPECÍFICOS:</p>
+            <Link to="Ejercicios">
+              <img
+                src="/imgs/training.jpg"
+                alt="Ejercicios"
+                className="img-index"
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
