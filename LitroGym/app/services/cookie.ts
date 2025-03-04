@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import { createCookie } from "@remix-run/node";
 
 if (!process.env.AUTH_COOKIE_SECRET) {
@@ -8,3 +11,5 @@ export const sessionCookie = createCookie("session_cookie", {
   httpOnly: true,
   secure: true,
 });
+
+console.log("AUTH_COOKIE_SECRET:", process.env.AUTH_COOKIE_SECRET);
