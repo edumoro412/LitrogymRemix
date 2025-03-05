@@ -33,16 +33,3 @@ export const toggleEjercicioFavorito = async (
     });
   }
 };
-export async function todosEjercicios(search?: string) {
-  // Filtrar ejercicios por búsqueda (opcional)
-  const whereClause = search
-    ? {
-        nombre: {
-          contains: search,
-          mode: "insensitive",
-        },
-      }
-    : {};
-
-  return await db.ejercicio.findMany({ where: whereClause });
-}
