@@ -1,7 +1,9 @@
 .recetas {
-  background-image: linear-gradient(to bottom,
+  background-image: linear-gradient(
+      to bottom,
       rgba(38, 38, 38, 0.5),
-      rgb(0, 0, 0)),
+      rgb(0, 0, 0)
+    ),
     url("/imgs/fondoComida.jpg");
   background-size: cover;
   background-position: center;
@@ -148,9 +150,11 @@ a {
 #airfryer1,
 #airfryer2,
 #airfryer3 {
-  background-image: linear-gradient(to right bottom,
-      rgba(190, 190, 190, 0.1),
-      rgb(0, 0, 0));
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(190, 190, 190, 0.1),
+    rgb(0, 0, 0)
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

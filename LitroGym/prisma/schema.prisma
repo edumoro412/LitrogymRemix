@@ -18,6 +18,7 @@ model User {
   name                String
   email               String       @unique
   password            String
+  color               String       @default("black")
   ejerciciosFavoritos UserEjercicio[]  @relation("UserFavoritosEjercicios")
   rutinas             Rutina[]     @relation("UserRutinas")
   createdAt           DateTime     @default(now())

@@ -140,7 +140,23 @@ export default function UserDashboard() {
             )}
           </span>
         </h2>
-
+        <button
+          className="px-6 py-3 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+          style={{
+            backgroundColor: "var(--color-primary)",
+            color: "white",
+          }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor =
+              "var(--color-primary-light)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "var(--color-primary)")
+          }
+          onClick={() => (window.location.href = "settings.app")}
+        >
+          AJUSTES
+        </button>
         <button
           className="bg-red-600 py-2 px-4 sm:py-1 sm:px-2 rounded-3xl w-[50%] text-white font-semibold text-lg sm:text-base hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
           onClick={() => (window.location.href = "Logout")}
