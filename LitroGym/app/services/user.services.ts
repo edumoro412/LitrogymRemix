@@ -22,6 +22,24 @@ export const createUser = async (
   return user;
 };
 
+export function BorrarUsuario(id_user: string) {
+  return db.user.delete({
+    where: {
+      id: id_user,
+    },
+  });
+}
+
+export function CambiarNombre(nombre: string | undefined, id_user: string) {
+  return db.user.update({
+    where: {
+      id: id_user,
+    },
+    data: {
+      name: nombre,
+    },
+  });
+}
 export function getUser(email: string) {
   return db.user.findUnique({
     where: {
@@ -34,6 +52,17 @@ export function getUserById(id: string) {
   return db.user.findUnique({
     where: {
       id,
+    },
+  });
+}
+
+export function ChangeName(name: string, id: string) {
+  return db.user.update({
+    where: {
+      id,
+    },
+    data: {
+      name,
     },
   });
 }
@@ -59,11 +88,5 @@ export async function EjerciciosFavoritos(userId: string) {
     include: {
       ejercicio: true,
     },
-  });
-}
-export function getUserColor(userId: string) {
-  return db.user.findUnique({
-    where: { id: userId },
-    select: { color: true },
   });
 }
