@@ -120,7 +120,7 @@ export default function Header({ userId, userName }: HeaderProps) {
         {userId && (
           <Link to="/user" className="block w-full h-full">
             <button
-              className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#ff4f4f] flex flex-col justify-center items-center"
+              className="text-sm sm:text-base md:text-lg border-0 text-white bg-black h-full px-4 hover:bg-[#232323] hover:border-b-2 hover:border-[#aaaaaa] flex flex-col justify-center items-center"
               style={{
                 backgroundColor: "var(--color-primary)",
                 color: "white",
