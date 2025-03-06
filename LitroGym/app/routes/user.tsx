@@ -51,11 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
       return { error: "El nombre no puede estar vacío" };
     }
 
-    console.log("Intentando cambiar nombre a:", newUserName);
-    console.log("Usuario:", userId);
-
     const result = await CambiarNombre(newUserName, userId);
-    console.log("Resultado:", result);
 
     session.set("userName", newUserName);
 
