@@ -76,6 +76,7 @@ async function main() {
     const rutina1 = await prisma.rutina.create({
         data: {
             userId: user1.id,
+            nombre: "Rutina de Juan",
             ejercicios: {
                 connect: allEjercicios.slice(0, 5).map((ej) => ({ id: ej.id })), // 5 ejercicios random
             },
@@ -85,6 +86,7 @@ async function main() {
     const rutina2 = await prisma.rutina.create({
         data: {
             userId: user1.id,
+            nombre: "Rutina de pepe",
             ejercicios: {
                 connect: allEjercicios.slice(5, 10).map((ej) => ({ id: ej.id })), // 5 ejercicios distintos
             },
@@ -94,6 +96,7 @@ async function main() {
     const rutina3 = await prisma.rutina.create({
         data: {
             userId: user2.id,
+            nombre: "Rutina de jose",
             ejercicios: {
                 connect: allEjercicios.slice(10, 15).map((ej) => ({ id: ej.id })), // 5 ejercicios random
             },
@@ -103,6 +106,7 @@ async function main() {
     const rutina4 = await prisma.rutina.create({
         data: {
             userId: user2.id,
+            nombre: "Rutina de ahmad",
             ejercicios: {
                 connect: allEjercicios.slice(15, 20).map((ej) => ({ id: ej.id })), // 5 ejercicios distintos
             },

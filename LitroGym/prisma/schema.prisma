@@ -42,6 +42,7 @@ model Rutina {
   ejercicios         Ejercicio[]  @relation("EjercicioRutinas")
   user               User         @relation("UserRutinas", fields: [userId], references: [id], onDelete: Cascade)
   userId             String
+  nombre             String
   createdAt          DateTime     @default(now())
   updatedAt          DateTime     @updatedAt
 }
