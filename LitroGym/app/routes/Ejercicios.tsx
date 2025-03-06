@@ -89,8 +89,8 @@ export default function Ejercicios() {
   };
 
   return (
-    <div className="bg-custom-color flex flex-col items-center justify-start min-h-screen ">
-      <Form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-blue-600 md:w-80 mx-auto">
+    <div className="bg-gray-400 flex flex-col items-center justify-start min-h-screen ">
+      <Form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-gray-600 md:w-80 mx-auto">
         <button className="px-2">
           <SearchIcon />
         </button>
