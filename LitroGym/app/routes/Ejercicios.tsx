@@ -106,17 +106,29 @@ export default function Ejercicios() {
 
   return (
     <div className="bg-custom-color flex flex-col items-center justify-start min-h-screen">
-      {/* Botón para agregar ejercicio */}
-      <div className="w-full flex justify-start p-4">
+      <div className="w-full flex justify-between p-4">
         <Link
-          to="/AgregarEjercicio" // Ruta a la página de agregar ejercicio
+          to="/AgregarEjercicio"
           className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           Agregar Ejercicio
         </Link>
+        {ejerciciosUsuario.length > 0 && (
+          <button
+            onClick={() => {
+              const misEjerciciosSection =
+                document.getElementById("mis-ejercicios");
+              if (misEjerciciosSection) {
+                misEjerciciosSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 ml-auto"
+          >
+            Ir a Mis Ejercicios
+          </button>
+        )}
       </div>
 
-      {/* Barra de búsqueda */}
       <Form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-blue-600 md:w-80 mx-auto">
         <button className="px-2">
           <SearchIcon />
@@ -131,7 +143,6 @@ export default function Ejercicios() {
         />
       </Form>
 
-      {/* Ejercicios generales */}
       <h2 className="text-2xl font-bold my-4">Ejercicios Generales</h2>
       <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto mb-4 snap-x snap-mandatory md:snap-none">
         {ejerciciosGenerales.map((ejercicio) => (
@@ -165,10 +176,11 @@ export default function Ejercicios() {
         ))}
       </ul>
 
-      {/* Ejercicios del usuario */}
       {userId && ejerciciosUsuario.length > 0 && (
         <>
-          <h2 className="text-2xl font-bold my-4">Mis Ejercicios</h2>
+          <h2 className="text-2xl font-bold my-4" id="mis-ejercicios">
+            Mis Ejercicios
+          </h2>
           <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none mb-4">
             {ejerciciosUsuario.map((ejercicio) => (
               <li
