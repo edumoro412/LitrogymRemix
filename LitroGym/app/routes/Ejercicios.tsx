@@ -104,7 +104,7 @@ export default function Ejercicios() {
         />
       </Form>
 
-      <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
+      <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none mb-5">
         {data.map((ejercicio: Ejercicio) => (
           <li
             key={ejercicio.id}
