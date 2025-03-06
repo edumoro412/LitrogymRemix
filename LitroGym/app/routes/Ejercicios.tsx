@@ -22,7 +22,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   const ejercicios = await todosEjercicios(search);
 
   if (!userId) {
-    // Si no hay userId (es decir, el usuario no está logueado), solo devolvemos los ejercicios
     return json({ data: ejercicios, userId, favoritosIds: [] });
   }
 
@@ -60,10 +59,6 @@ export default function Ejercicios() {
   // En cada iteración, tomamos el ejercicioId y lo agregamos como una clave en el objeto 'acc',
   // y le asignamos el valor 'true', indicando que el ejercicio es un favorito.
 
-  // Primera iteración: 'acc' es un objeto vacío {}. 'ejercicioId' es "123". Se agrega '123' como clave en 'acc' y su valor es 'true', resultando en: acc = { "123": true }
-
-  // Segunda iteración:'acc' es { "123": true }. 'ejercicioId' es "456". Se agrega '456' como clave en 'acc' y su valor es 'true', resultando en: acc = { "123": true, "456": true }
-
   const [liked, setLiked] = useState<Record<string, boolean>>(
     favoritosIds.reduce((acc, ejercicioId) => {
       if (typeof ejercicioId === "string") {
@@ -74,7 +69,6 @@ export default function Ejercicios() {
   );
 
   const handleClick = async (ejercicioId: string, userId: string) => {
-    //Esto lo que hace es hacer una solicitud al servidor. Enviamos los datos de userId y ejecicioId con el metodo post. Si todo va bien que lo sabemos mediane la propiedad ok, que lo que nos devielve es el codigo d estado, se llama a setLiked
     const response = await fetch("/ejercicios", {
       method: "POST",
 
@@ -85,8 +79,6 @@ export default function Ejercicios() {
     });
 
     if (response.ok) {
-      //Prev es la lista de todos los liked, entonces con el ...prev, le decimos que guarde todos y despues el que tenga el ejercicioId que se le pasa, lo que hace es cambiar el valor de true a false o al reves.
-
       setLiked((prev) => ({
         ...prev,
         [ejercicioId]: !prev[ejercicioId],
@@ -97,8 +89,8 @@ export default function Ejercicios() {
   };
 
   return (
-    <div className="bg-custom-color flex flex-col items-center justify-start min-h-screen ">
-      <Form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-blue-600 md:w-80 mx-auto">
+    <div className="bg-gray-400 flex flex-col items-center justify-start min-h-screen ">
+      <Form className="flex border-2 my-4 border-gray-300 rounded-md mt-2 focus-within:border-gray-600 md:w-80 mx-auto">
         <button className="px-2">
           <SearchIcon />
         </button>

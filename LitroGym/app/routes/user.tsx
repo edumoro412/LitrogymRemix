@@ -51,11 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
       return { error: "El nombre no puede estar vacío" };
     }
 
-    console.log("Intentando cambiar nombre a:", newUserName);
-    console.log("Usuario:", userId);
-
     const result = await CambiarNombre(newUserName, userId);
-    console.log("Resultado:", result);
 
     session.set("userName", newUserName);
 
@@ -94,15 +90,38 @@ export default function UserDashboard() {
       <div className="bg-gradient-to-b from-black/30 to-black w-full h-full absolute top-0 left-0"></div>
 
       <div className="bg-black bg-opacity-70 w-[90vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] h-[80%] flex flex-col justify-evenly items-center p-6 rounded-3xl shadow-2xl relative z-10">
-        <Form method="post" className="w-full flex justify-end" reloadDocument>
+        <Form
+          method="post"
+          className="w-full flex justify-start gap-4"
+          reloadDocument
+        >
           <button
             type="submit"
-            className="bg-red-800 py-2 px-4 sm:py-1 sm:px-2 rounded-lg hover:bg-red-700 text-sm sm:text-xs md:text-sm"
+            className="bg-red-800 py-2 px-4 sm:py-1 sm:px-2 rounded-lg hover:bg-red-700  hover:scale-105 active:scale-95 text-sm sm:text-xs md:text-sm"
             name="action"
             value="borrarCuenta"
           >
             Borrar Cuenta
           </button>
+
+          <a
+            href="/settings.app"
+            className="px-6 py-3 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+            style={{
+              backgroundColor: "var(--color-primary)",
+              color: "white",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-primary-light)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "var(--color-primary)")
+            }
+            onClick={() => (window.location.href = "settings.app")}
+          >
+            Ajustes
+          </a>
         </Form>
         <h2 className="text-center text-3xl sm:text-2xl font-bold text-gray-100 m-4">
           <span className="flex items-center justify-center gap-2">
@@ -140,23 +159,7 @@ export default function UserDashboard() {
             )}
           </span>
         </h2>
-        <button
-          className="px-6 py-3 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
-          style={{
-            backgroundColor: "var(--color-primary)",
-            color: "white",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              "var(--color-primary-light)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--color-primary)")
-          }
-          onClick={() => (window.location.href = "settings.app")}
-        >
-          AJUSTES
-        </button>
+
         <button
           className="bg-red-600 py-2 px-4 sm:py-1 sm:px-2 rounded-3xl w-[50%] text-white font-semibold text-lg sm:text-base hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
           onClick={() => (window.location.href = "Logout")}
