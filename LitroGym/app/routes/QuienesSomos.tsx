@@ -73,6 +73,21 @@ function QuienesSomos() {
               </div>
             </div>
           </div>
+
+          <div className="miembro">
+            <div className="flip-card">
+              <div className="front">
+                <img
+                  src="/imgs/BOCAAA.jpg"
+                  alt="Felipe Garcia"
+                  className="imagen-miembro"
+                />
+              </div>
+              <div className="back">
+                <p>Felipe Garcia - Desarrollador</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

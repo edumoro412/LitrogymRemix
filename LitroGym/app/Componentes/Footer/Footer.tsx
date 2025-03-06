@@ -2,7 +2,13 @@ import { Link } from "@remix-run/react";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer
+      className="footer"
+      style={{
+        backgroundColor: "var(--color-primary)", // Fondo predeterminado
+        color: "white",
+      }}
+    >
       <div className="footer-content">
         <div className="footer-content-left">
           <strong className="footer-content-title">LITROGYM</strong>
