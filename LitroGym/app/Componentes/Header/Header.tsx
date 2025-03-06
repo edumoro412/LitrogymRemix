@@ -34,7 +34,7 @@ export default function Header({ userId, userName }: HeaderProps) {
           alt="Logo"
           className="h-16 sm:h-20 md:h-full w-auto max-w-full"
         />
-        <p className="text-xl md:text-[190%] ml-2 hidden md:block">
+        <p className="text-xl ml-2 hidden custom:block md:text-[190%]">
           <b>LITROGYM</b>
         </p>
       </div>

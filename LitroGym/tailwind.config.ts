@@ -22,6 +22,9 @@ export default {
           "Noto Color Emoji",
         ],
       },
+      screens: {
+        custom: "870px",
+      },
     },
   },
   plugins: [],
