@@ -169,7 +169,7 @@ export default function Ejercicios() {
       {userId && ejerciciosUsuario.length > 0 && (
         <>
           <h2 className="text-2xl font-bold my-4">Mis Ejercicios</h2>
-          <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
+          <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none mb-4">
             {ejerciciosUsuario.map((ejercicio) => (
               <li
                 key={ejercicio.id}
