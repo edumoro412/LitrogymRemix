@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react";
 export default function Footer() {
   return (
     <footer
-      className="footer"
+      className="footer mt-8 py-4 h-fit flex flex-col md:flex-row items-center md:items-start justify-between px-8 md:px-16 "
       style={{
         backgroundColor: "var(--color-primary)", // Fondo predeterminado
         color: "white",
