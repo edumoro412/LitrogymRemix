@@ -1,21 +1,23 @@
 import db from "../db.server";
 
-// Obtengo todas las rutinas de un usuario
+// Obtengotodas las rutinas de un usuario
 export async function getRutinasByUser(userId: string) {
   return db.rutina.findMany({
     where: { userId },
-    include: { ejercicios: true },
+    include: {
+      ejercicios: true, // Incluyo los ejercicios asociados a la rutina
+    },
   });
 }
 
-// Creo una rutina conectando los ejercicios seleccionados al usuario
+// Crear una nueva rutina
 export async function crearRutina(userId: string, nombre: string, ejercicioIds: string[]) {
   return db.rutina.create({
     data: {
       nombre,
       user: { connect: { id: userId } },
       ejercicios: {
-        connect: ejercicioIds.map((id) => ({ id })),
+        connect: ejercicioIds.map((id) => ({ id })), // Conecto los ejercicios seleccionados
       },
     },
   });

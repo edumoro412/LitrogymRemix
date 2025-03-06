@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -14,35 +11,35 @@ generator client {
 }
 
 model User {
-  id                  String       @id @default(cuid()) 
+  id                  String            @id @default(cuid())
   name                String
-  email               String       @unique
+  email               String            @unique
   password            String
-  ejerciciosFavoritos UserEjercicio[]  @relation("UserFavoritosEjercicios")
-  rutinas             Rutina[]     @relation("UserRutinas")
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @updatedAt
-
+  ejerciciosFavoritos UserEjercicio[]   @relation("UserFavoritosEjercicios")
+  rutinas             Rutina[]          @relation("UserRutinas")
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
 }
 
 model Ejercicio {
-  id                 String       @id @default(cuid()) 
+  id                 String            @id @default(cuid())
   nombre             String
   musculo            String
-  video              String?   @default("")
-  usuariosFavoritos  UserEjercicio[]       @relation("UserFavoritosEjercicios")
-  rutinas            Rutina[]     @relation("EjercicioRutinas")
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
+  video              String?           @default("")
+  usuariosFavoritos  UserEjercicio[]   @relation("UserFavoritosEjercicios")
+  rutinas            Rutina[]          @relation("EjercicioRutinas")
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
 }
 
 model Rutina {
-  id                 String       @id @default(cuid()) 
-  ejercicios         Ejercicio[]  @relation("EjercicioRutinas")
-  user               User         @relation("UserRutinas", fields: [userId], references: [id], onDelete: Cascade)
+  id                 String            @id @default(cuid())
+  nombre             String
+  ejercicios         Ejercicio[]       @relation("EjercicioRutinas")
+  user               User              @relation("UserRutinas", fields: [userId], references: [id], onDelete: Cascade)
   userId             String
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
 }
 
 model UserEjercicio {

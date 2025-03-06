@@ -40,13 +40,11 @@ type ActionData = {
 
 export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
-  // Si se envía deleteId, se eliminará la rutina
   const deleteId = formData.get("deleteId");
   if (deleteId && typeof deleteId === "string") {
     await eliminarRutina(deleteId);
     return redirect("/rutina");
   }
-  // Si no, se crea una nueva rutina
   const nombre = formData.get("nombre");
   const ejercicioIds = formData.getAll("ejercicioIds");
   const session = await getSession(request.headers.get("cookie"));
