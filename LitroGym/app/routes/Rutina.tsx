@@ -80,7 +80,7 @@ export async function action({ request }: { request: Request }) {
 export default function Rutina() {
   const { rutinas, ejerciciosDisponibles } = useLoaderData<{ rutinas: Routine[]; ejerciciosDisponibles: { id: string; nombre: string }[] }>();
   const [modalAbierto, setModalAbierto] = useState(false);
-
+  const [rutinaSeleccionada, setRutinaSeleccionada] = useState<Routine | null>(null);
 
   return (
     <>
@@ -99,8 +99,8 @@ export default function Rutina() {
       <div className="p-6">
 
         <h1 className="text-2xl font-bold text-white">Tus Rutinas</h1>
-        <div className=" justify-between items-center bg-blue-500">
-          <ul className=" flex flex-row  mt-4 space-y-4">
+        <div className="p-5 justify-between items-center bg-blue-500">
+          <ul className=" flex flex-row  mt-4">
             {rutinas.map((rutina) => (
               <li key={rutina.id} className="basis-auto m-4 p-4 border rounded">
                 <h2 className="text-xl">{rutina.nombre}</h2>
@@ -125,6 +125,12 @@ export default function Rutina() {
                     Ver Rutina
                   </button>
                 </Form>
+                <button className="text-white bg-slate-600 rounded-md p-3 hover:bg-orange-500" onClick={() => {
+                  setRutinaSeleccionada(rutina);
+                  setModalAbierto(true);
+                }}>
+                  Editar Rutina
+                </button>
               </li>
             ))}
           </ul>
@@ -138,7 +144,10 @@ export default function Rutina() {
         </button>
 
 
-        {modalAbierto && <ModalCrearRutina onClose={() => setModalAbierto(false)} ejerciciosDisponibles={ejerciciosDisponibles} />}
+        {modalAbierto && <ModalCrearRutina isOpen={modalAbierto} onClose={() => {
+          setModalAbierto(false);
+          setRutinaSeleccionada(null); // Limpia los datos al cerrar
+        }} ejerciciosDisponibles={ejerciciosDisponibles} />}
 
 
       </div>

@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 export default function Footer() {
   return (
-    <footer className="mt-8 py-4 h-fit bg-gray-900 text-white flex flex-col md:flex-row items-center md:items-start justify-between px-8 md:px-16 ">
+    <footer className="footer py-4 h-fit bg-gray-900 text-white flex flex-col md:flex-row items-center md:items-start justify-between px-8 md:px-16 ">
       {/* <div className="flex justify-center md:justify-start space-x-6 w-full md:w-1/3 mb-4 md:mb-0">
         <a
           href="https://www.instagram.com/s0ymelen/"
