@@ -133,7 +133,7 @@ export default function Ejercicios() {
 
       {/* Ejercicios generales */}
       <h2 className="text-2xl font-bold my-4">Ejercicios Generales</h2>
-      <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
+      <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto mb-4 snap-x snap-mandatory md:snap-none">
         {ejerciciosGenerales.map((ejercicio) => (
           <li
             key={ejercicio.id}
@@ -166,7 +166,7 @@ export default function Ejercicios() {
       </ul>
 
       {/* Ejercicios del usuario */}
-      {userId && (
+      {userId && ejerciciosUsuario.length > 0 && (
         <>
           <h2 className="text-2xl font-bold my-4">Mis Ejercicios</h2>
           <ul className="flex flex-wrap justify-center gap-8 overflow-x-auto snap-x snap-mandatory md:snap-none">
