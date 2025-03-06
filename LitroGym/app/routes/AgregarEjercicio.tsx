@@ -2,10 +2,19 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import prisma from "~/db.server"; // Asegúrate de tener configurado tu cliente de Prisma
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import fs from "fs";
 import path from "path";
 import { getSession } from "~/services/session";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("cookie"));
+  const userId = session.get("userId");
+  if (!userId) {
+    return redirect("/login");
+  }
+  return null;
+};
 
 export const action: ActionFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
