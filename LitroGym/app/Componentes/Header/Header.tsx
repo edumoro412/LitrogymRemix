@@ -75,7 +75,7 @@ export default function Header({ userId, userName }: HeaderProps) {
                 (e.currentTarget.style.backgroundColor = "var(--color-primary)")
               }
             >
-              INICIA SESION
+              INICIAR SESION
             </button>
           </Link>
         )}
