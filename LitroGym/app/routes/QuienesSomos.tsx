@@ -6,8 +6,6 @@ function QuienesSomos() {
 
   return (
     <div className="QuienesSomos">
-      <h1>QUIÉNES SOMOS</h1>
-
       <div className="equipo">
         <h2>Nuestro Equipo</h2>
 
