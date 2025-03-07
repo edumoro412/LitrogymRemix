@@ -87,16 +87,16 @@ export default function SettingApp() {
         <button
           className="px-6 py-3 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
           style={{
-            backgroundColor: "var(--color-primary)", // Fondo dinámico
-            color: "white", // Texto blanco para buen contraste
+            backgroundColor: "var(--color-primary)",
+            color: "white",
           }}
           onMouseEnter={(e) =>
             (e.currentTarget.style.backgroundColor =
               "var(--color-primary-light)")
-          } // Hover dinámico
+          }
           onMouseLeave={(e) =>
             (e.currentTarget.style.backgroundColor = "var(--color-primary)")
-          } // Volver al color original
+          }
         >
           Save
         </button>

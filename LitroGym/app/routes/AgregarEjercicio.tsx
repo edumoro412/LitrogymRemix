@@ -1,7 +1,6 @@
-// app/routes/ejercicios/new.tsx
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
-import prisma from "~/db.server"; // Asegúrate de tener configurado tu cliente de Prisma
+import prisma from "~/db.server";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import fs from "fs";
 import path from "path";
@@ -24,9 +23,8 @@ export const action: ActionFunction = async ({ request }) => {
   const nombre = formData.get("nombre") as string;
   const musculo = formData.get("musculo") as string;
   const videoFile = formData.get("video") as File | null;
-  const esGeneral = formData.get("esGeneral") === "on"; // Verifica si el checkbox está marcado
+  const esGeneral = formData.get("esGeneral") === "on";
 
-  // Validación básica
   if (!nombre || !musculo) {
     return json(
       { error: "Nombre y músculo son campos requeridos" },
@@ -34,7 +32,6 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  // Guardar el archivo de video si existe
   let videoPath = "";
   if (videoFile) {
     const uploadDir = path.join(process.cwd(), "public", "vids");
@@ -49,17 +46,16 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  // Crear el ejercicio en la base de datos
   try {
     await prisma.ejercicio.create({
       data: {
         nombre,
         musculo,
         video: videoPath || "",
-        userId: esGeneral ? null : userId, // Asociar el ejercicio al usuario o dejarlo como general
+        userId: esGeneral ? null : userId,
       },
     });
-    return redirect("/ejercicios"); // Redirige a la lista de ejercicios
+    return redirect("/ejercicios");
   } catch (error) {
     console.error("Error al crear el ejercicio:", error);
     return json({ error: "Error al crear el ejercicio" }, { status: 500 });

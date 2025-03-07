@@ -6,15 +6,11 @@ interface Ejercicio extends PrismaEjercicio {
 import { json, LoaderFunction, ActionFunction } from "@remix-run/node";
 import { Form, useLoaderData, useSearchParams } from "@remix-run/react";
 import { useState } from "react";
-// eslint-disable-next-line import/no-unresolved
+
 import { todosEjercicios } from "~/models/ejercicio.server";
-// eslint-disable-next-line import/no-unresolved
 import { ConLike, SearchIcon, SinLike } from "~/services/icons";
-// eslint-disable-next-line import/no-unresolved
 import { getSession } from "~/services/session";
-// eslint-disable-next-line import/no-unresolved
 import { toggleEjercicioFavorito } from "~/services/ejercicio.server";
-// eslint-disable-next-line import/no-unresolved
 import { EjerciciosFavoritos } from "~/services/user.services";
 
 import { Link } from "@remix-run/react";
