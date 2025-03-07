@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/node";
+import {
+  ActionFunction,
+  json,
+  LoaderFunction,
+  redirect,
+} from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { EditIcon, SaveIcon } from "~/services/icons";
 import { getSession, commitSession, destroySession } from "~/services/session";
@@ -9,7 +14,6 @@ import {
   BorrarUsuario,
   CambiarNombre,
   EjerciciosFavoritos,
-
 } from "~/services/user.services";
 import db from "~/db.server";
 
@@ -23,16 +27,14 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect("/LogIn", 302);
   }
 
-  // Obtener el usuario con su color
   const user = await db.user.findUnique({
     where: { id: userId },
-    select: { color: true }
+    select: { color: true },
   });
 
   const ejerciciosFavoritos = await EjerciciosFavoritos(userId);
   return { userName, ejerciciosFavoritos, userColor: user?.color || "#000000" };
 };
-
 
 export const action: ActionFunction = async ({ request }) => {
   const cookieHeader = request.headers.get("cookie");
@@ -47,15 +49,16 @@ export const action: ActionFunction = async ({ request }) => {
     const theme = formData.get("theme") as string;
 
     if (!theme) {
-      return json({ errors: { theme: "El tema es requerido" } }, { status: 400 });
+      return json(
+        { errors: { theme: "El tema es requerido" } },
+        { status: 400 }
+      );
     }
 
-    // Actualizar el color en la base de datos
     await db.user.update({
       where: { id: userId },
       data: { color: theme },
     });
-    // Redirigir para recargar la página con el nuevo color
     return redirect("/user");
   }
 
@@ -129,15 +132,14 @@ export default function UserDashboard() {
           </button>
 
           <a
-
             className="px-6 py-3 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
             style={{
               backgroundColor: "var(--color-primary)",
               color: "white",
             }}
             onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              "var(--color-primary-light)")
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-primary-light)")
             }
             onMouseLeave={(e) =>
               (e.currentTarget.style.backgroundColor = "var(--color-primary)")

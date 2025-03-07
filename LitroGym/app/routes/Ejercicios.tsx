@@ -22,10 +22,8 @@ export const loader: LoaderFunction = async ({ request }) => {
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search");
 
-  // Obtener todos los ejercicios (generales y del usuario)
   const ejercicios = await todosEjercicios(search);
 
-  // Separar ejercicios generales y del usuario
   const ejerciciosGenerales = ejercicios.filter(
     (ejercicio: Ejercicio) => !ejercicio.userId
   );
@@ -33,7 +31,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     ? ejercicios.filter((ejercicio: Ejercicio) => ejercicio.userId === userId)
     : [];
 
-  // Obtener los IDs de los ejercicios favoritos del usuario (si está logueado)
   let favoritosIds: string[] = [];
   if (userId) {
     const ejerciciosFavoritos = await EjerciciosFavoritos(userId);
@@ -70,7 +67,6 @@ export default function Ejercicios() {
     }>();
   const [searchParams] = useSearchParams();
 
-  // Estado para manejar los "likes" (favoritos)
   const [liked, setLiked] = useState<Record<string, boolean>>(
     favoritosIds.reduce((acc, ejercicioId) => {
       if (typeof ejercicioId === "string") {
@@ -80,7 +76,6 @@ export default function Ejercicios() {
     }, {} as Record<string, boolean>)
   );
 
-  // Función para manejar el clic en el botón de "like"
   const handleClick = async (ejercicioId: string, userId: string) => {
     const response = await fetch("/ejercicios", {
       method: "POST",

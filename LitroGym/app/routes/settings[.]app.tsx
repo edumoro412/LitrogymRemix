@@ -33,7 +33,6 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ errors: { theme: "El tema es requerido" } }, { status: 400 });
   }
 
-  // Actualizar el color en la base de datos
   await prisma.user.update({
     where: { id: userId },
     data: { color: theme },
@@ -43,7 +42,7 @@ export async function action({ request }: ActionFunctionArgs) {
     { theme },
     {
       headers: {
-        "Set-Cookie": await themeCookie.serialize(theme), // Guardar también en la cookie
+        "Set-Cookie": await themeCookie.serialize(theme),
       },
     }
   );
