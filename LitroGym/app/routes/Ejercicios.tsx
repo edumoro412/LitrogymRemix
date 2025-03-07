@@ -101,10 +101,7 @@ export default function Ejercicios() {
   };
 
   return (
-    <div className=" flex flex-col items-center justify-start min-h-screen "
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(175, 175, 175, 0.5), rgb(0, 0, 0)), url("/imgs/gymbg.jpg")`
-      }}>
+    <div className=" flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-gray-500 via-gray-800 to-gray-700 text-white">
       <div className="w-full flex justify-between p-4">
         <Link
           to="/AgregarEjercicio"

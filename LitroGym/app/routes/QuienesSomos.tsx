@@ -9,7 +9,10 @@ function QuienesSomos() {
       <div className="equipo">
         <h2>Nuestro Equipo</h2>
 
-        <button onClick={desopacar} type="button">
+        <button style={{
+          backgroundColor: "var(--color-primary)",
+          color: "white",
+        }} onClick={desopacar} type="button">
           <b> Descubrir Miembros</b>
         </button>
 
