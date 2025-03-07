@@ -109,13 +109,14 @@ export default function Ejercicios() {
         >
           Agregar Ejercicio
         </Link>
-
-        <Link
-          to="/EliminarEjercicio"
-          className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mx-3"
-        >
-          Eliminar Ejercicio
-        </Link>
+        {ejerciciosUsuario.length > 0 && (
+          <Link
+            to="/EliminarEjercicio"
+            className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mx-3"
+          >
+            Eliminar Ejercicio
+          </Link>
+        )}
 
         {ejerciciosUsuario.length > 0 && (
           <button

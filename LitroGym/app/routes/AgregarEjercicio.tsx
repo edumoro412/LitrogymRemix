@@ -105,6 +105,7 @@ export default function AddExercise() {
               type="file"
               name="video"
               accept=".mp4"
+              required
               className="w-full px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
