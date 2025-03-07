@@ -5,6 +5,8 @@ import { getSession } from "~/services/session";
 import { getRutinasByUser } from "~/services/user.services";
 import { useState } from "react";
 import ModalCrearRutina from "../Componentes/ModalCrearRutina";
+import { Ojo } from '../services/icons';
+
 
 type FavoriteEjercicio = {
   ejercicio: {
@@ -25,6 +27,7 @@ type LoaderData = {
   rutinas: Routine[];
 };
 
+
 // Obtener todas las rutinas del usuario
 export async function loader({ request }: { request: Request }) {
   const ejerciciosDisponibles = await db.ejercicio.findMany();
@@ -39,12 +42,35 @@ export async function loader({ request }: { request: Request }) {
   return json({ rutinas, ejerciciosDisponibles });
 }
 
+
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const actionType = formData.get("_action");
   const session = await getSession(request.headers.get("cookie"));
   const userId = session.get("userId");
 
+  if (actionType === "edit") {
+    const rutinaId = formData.get("rutinaId");
+    const nombre = formData.get("nombre");
+    const ejercicios = JSON.parse(formData.get("ejercicios") as string || "[]");
+
+    try {
+      await db.rutina.update({
+        where: { id: rutinaId as string },
+        data: {
+          nombre,
+          ejercicios: {
+            set: ejercicios.map((id: string) => ({ id })),
+          },
+        },
+      });
+
+      return json({ success: true });
+    } catch (error) {
+      console.error("Error editando rutina:", error);
+      return json({ error: "Error al editar rutina" }, { status: 500 });
+    }
+  }
   if (actionType === "create") {
     const nombre = formData.get("nombre");
     const ejercicios = JSON.parse(formData.get("ejercicios") as string || "[]");
@@ -84,73 +110,86 @@ export default function Rutina() {
 
   return (
     <>
-      <div className="rutina">
-        <div className="rutina-titulo">
-          <p>
-            <b>RUTINA SEMANAL DE ENTRENO</b>
-          </p>
+      <div className="relative w-full min-h-screen flex flex-col items-center justify-start text-white py-8 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(175, 175, 175, 0.5), rgb(0, 0, 0)), url("/imgs/fotoFondo.jpg")`
+        }}>
+        <div className="w-full mb-6">
+          <p className="text-[250%] font-bold text-center">RUTINA SEMANAL DE ENTRENO</p>
         </div>
-        <div className="rutina-imagen" id="d1"></div>
-        <div className="rutina-imagen" id="d2"></div>
-        <div className="rutina-imagen" id="d3"></div>
-        <div className="rutina-imagen" id="d4"></div>
-        <div className="rutina-imagen" id="d5"></div>
-      </div>
-      <div className="p-6">
 
-        <h1 className="text-2xl font-bold text-white">Tus Rutinas</h1>
-        <div className="p-5 justify-between items-center bg-blue-500">
-          <ul className=" flex flex-row  mt-4">
+        <div className="w-full max-w-7xl px-4 sm:px-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {rutinas.map((rutina) => (
-              <li key={rutina.id} className="basis-auto m-4 p-4 border rounded">
-                <h2 className="text-xl">{rutina.nombre}</h2>
-                <p>{rutina.ejercicios.length} ejercicios</p>
-                <div>
-                  <ul>
+              <li key={rutina.id} className="relative basis-auto m-4 bg-gray-900/90 border border-gray-800 rounded-lg shadow-lg hover:scale-105 transition-all duration-300 ease-in-out min-h-[220px] w-full max-w-xs overflow-hidden">
+                {/* Header con nombre y botón de ver */}
+                <div className="flex justify-between items-center p-3 bg-gray-900 border-b border-gray-800">
+                  <h2 className="text-lg text-white font-semibold truncate pr-2">{rutina.nombre}</h2>
+                  <Link to={`/VerRutina/${encodeURIComponent(rutina.nombre)}`}>
+                    <button className="text-white bg-gray-700 rounded-full p-2 hover:bg-blue-600 transition-colors duration-300">
+                      <Ojo className="w-5 h-5" />
+                    </button>
+                  </Link>
+                </div>
+
+                {/* Contenido de la rutina - ejercicios */}
+                <div className="p-3 pb-16 text-white">
+                  <p className="text-gray-400 mb-2">{rutina.ejercicios.length} ejercicios</p>
+                  <ul className="space-y-1">
                     {rutina.ejercicios.map((ejercicio) => (
-                      <li key={ejercicio.id}>{ejercicio.nombre}</li>
+                      <li key={ejercicio.id} className="text-gray-300">{ejercicio.nombre}</li>
                     ))}
                   </ul>
                 </div>
 
-                <Form method="post">
-                  <input type="hidden" name="rutinaId" value={rutina.id} />
-                  <button type="submit" name="_action" value="delete" className="text-white bg-slate-600 rounded-md p-3 hover:bg-red-500">
-                    Eliminar
+                {/* Footer con botones */}
+                <div className="absolute bottom-0 left-0 right-0 flex justify-between p-3 bg-gray-900 border-t border-gray-800">
+                  <Form method="post" className="w-1/2 pr-1">
+                    <input type="hidden" name="rutinaId" value={rutina.id} />
+                    <button
+                      type="submit"
+                      name="_action"
+                      value="delete"
+                      className="w-full text-white bg-gray-700 rounded-md py-2 px-3 hover:bg-red-600 transition-colors duration-300 text-sm">
+                      Eliminar
+                    </button>
+                  </Form>
+                  <button
+                    className="w-1/2 pl-1 text-white bg-gray-700 rounded-md py-2 px-3 hover:bg-blue-600 transition-colors duration-300 text-sm"
+                    onClick={() => {
+                      setRutinaSeleccionada(rutina);
+                      setModalAbierto(true);
+                    }}>
+                    Editar Rutina
                   </button>
-                </Form>
-                <Form method="post">
-                  <input type="hidden" name="rutinaId" value={rutina.id} />
-                  <button type="submit" name="_action" value="verRutina" className="text-white bg-slate-600 rounded-md p-3 hover:bg-green-500">
-                    Ver Rutina
-                  </button>
-                </Form>
-                <button className="text-white bg-slate-600 rounded-md p-3 hover:bg-orange-500" onClick={() => {
-                  setRutinaSeleccionada(rutina);
-                  setModalAbierto(true);
-                }}>
-                  Editar Rutina
-                </button>
+                </div>
               </li>
             ))}
           </ul>
-
-
         </div>
 
-
-        <button onClick={() => setModalAbierto(true)} className="my-4 p-2 bg-blue-500 text-white rounded">
+        <button
+          onClick={() => {
+            setRutinaSeleccionada(null); // Para asegurarnos de que no hay datos cargados
+            setModalAbierto(true);
+          }}
+          className="my-4 p-2  text-white rounded"
+          style={{
+            backgroundColor: "var(--color-primary)",
+            color: "white",
+          }}>
           Crear Rutina
         </button>
-
 
         {modalAbierto && <ModalCrearRutina isOpen={modalAbierto} onClose={() => {
           setModalAbierto(false);
           setRutinaSeleccionada(null); // Limpia los datos al cerrar
-        }} ejerciciosDisponibles={ejerciciosDisponibles} />}
+        }} ejerciciosDisponibles={ejerciciosDisponibles}
+          rutina={rutinaSeleccionada ?? undefined} />}
 
 
       </div>
+
     </>
   );
 }

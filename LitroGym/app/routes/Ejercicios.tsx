@@ -101,7 +101,10 @@ export default function Ejercicios() {
   };
 
   return (
-    <div className="bg-custom-color flex flex-col items-center justify-start min-h-screen">
+    <div className=" flex flex-col items-center justify-start min-h-screen "
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(175, 175, 175, 0.5), rgb(0, 0, 0)), url("/imgs/gymbg.jpg")`
+      }}>
       <div className="w-full flex justify-between p-4">
         <Link
           to="/AgregarEjercicio"
@@ -112,7 +115,7 @@ export default function Ejercicios() {
 
         <Link
           to="/EliminarEjercicio"
-          className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mx-3"
         >
           Eliminar Ejercicio
         </Link>

@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import { UserIcon } from "../../services/icons";
 
+
 interface HeaderProps {
   userId?: string;
   userName?: string;
@@ -48,8 +49,8 @@ export default function Header({ userId, userName }: HeaderProps) {
               color: "white",
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                "var(--color-primary-light)")
+            (e.currentTarget.style.backgroundColor =
+              "var(--color-primary-light)")
             }
             onMouseLeave={(e) =>
               (e.currentTarget.style.backgroundColor = "var(--color-primary)")
@@ -68,8 +69,8 @@ export default function Header({ userId, userName }: HeaderProps) {
                 color: "white",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  "var(--color-primary-light)")
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-primary-light)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.backgroundColor = "var(--color-primary)")
@@ -88,8 +89,8 @@ export default function Header({ userId, userName }: HeaderProps) {
               color: "white",
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                "var(--color-primary-light)")
+            (e.currentTarget.style.backgroundColor =
+              "var(--color-primary-light)")
             }
             onMouseLeave={(e) =>
               (e.currentTarget.style.backgroundColor = "var(--color-primary)")
@@ -106,8 +107,8 @@ export default function Header({ userId, userName }: HeaderProps) {
             color: "white",
           }}
           onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              "var(--color-primary-light)")
+          (e.currentTarget.style.backgroundColor =
+            "var(--color-primary-light)")
           }
           onMouseLeave={(e) =>
             (e.currentTarget.style.backgroundColor = "var(--color-primary)")
@@ -126,8 +127,8 @@ export default function Header({ userId, userName }: HeaderProps) {
                 color: "white",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  "var(--color-primary-light)")
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-primary-light)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.backgroundColor = "var(--color-primary)")

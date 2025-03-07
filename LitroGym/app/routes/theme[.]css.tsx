@@ -22,8 +22,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const data = `
   :root {
-    --color-primary: ${theme.colorPrimary};
-    --color-primary-light: ${theme.colorPrimaryLight};
+    --color-primary: ${userColor};
+    --color-primary-light: ${userColor};
   }
   `;
 

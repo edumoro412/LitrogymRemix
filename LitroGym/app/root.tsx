@@ -61,13 +61,12 @@ export const loader: LoaderFunction = async ({ request }) => {
 export const links: LinksFunction = () => [
   { rel: "icon", href: "/imgs/logoIcon.png" }, // Esta línea es para poner el logo en la pestaña
   { rel: "shortcut icon", href: "/imgs/logoIcon.png" },
-  { rel: "stylesheet", href: "/Styles/home.css" },
-  { rel: "stylesheet", href: "Styles/Footer.css" },
-  { rel: "stylesheet", href: "Styles/Registro.css" },
-  { rel: "stylesheet", href: "Styles/Alimentacion.css" },
-  { rel: "stylesheet", href: "Styles/Rutina.css" },
-  { rel: "stylesheet", href: "Styles/recetas.css" },
-  { rel: "stylesheet", href: "Styles/QuienesSomos.css" },
+  { rel: "stylesheet", href: "/public//Styles/home.css" },
+  { rel: "stylesheet", href: "/public/Styles/Footer.css" },
+  { rel: "stylesheet", href: "/public/Styles/Registro.css" },
+  { rel: "stylesheet", href: "/public/Styles/Alimentacion.css" },
+  { rel: "stylesheet", href: "/public/Styles/recetas.css" },
+  { rel: "stylesheet", href: "/public/Styles/QuienesSomos.css" },
   { rel: "stylesheet", href: "/theme.css?v=" + Date.now() },
 ];
 

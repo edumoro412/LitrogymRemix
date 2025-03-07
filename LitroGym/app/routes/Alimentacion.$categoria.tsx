@@ -117,7 +117,7 @@ const recetas = {
         carbohidratos: "68 g",
         grasas: "11 g",
         url: "https://www.myprotein.es/thezone/recetas/hamburguesa-vegana-remolacha/",
-        imagen: "/imgs/HamburguesaVeganaRemolacha.jpg",
+        imagen: "/imgs/hamburguesaVegana.jpg",
       },
       {
         id: "vegana2",
